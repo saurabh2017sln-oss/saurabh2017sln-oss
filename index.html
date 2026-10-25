@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saurabh Mishra | Agentic AI & DevSecOps Cloud Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #060913;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+    /* Interactive Neural Canvas */
+    #neural-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: auto;
+    }
+    /* Content Overlay */
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      text-align: center;
+      pointer-events: none; /* Let canvas capture touch / mouse */
+    }
+    .interactive-element {
+      pointer-events: auto;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: #00f0ff;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, #00f0ff 50%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .subtitle {
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: #a855f7;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .description {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #94a3b8;
+      max-width: 750px;
+      margin: 0 auto 36px;
+    }
+    .touch-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px dashed rgba(168, 85, 247, 0.5);
+      border-radius: 12px;
+      color: #c084fc;
+      font-size: 14px;
+      margin-bottom: 40px;
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); box-shadow: 0 0 25px rgba(168, 85, 247, 0.3); }
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Fira Code', monospace;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #00f0ff, #7928ca);
+      color: #ffffff;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.6);
+    }
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.8);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-secondary:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: #00f0ff;
+      color: #00f0ff;
+      transform: translateY(-2px);
+    }
+    .stats-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .stat-card {
+      background: rgba(11, 17, 44, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 240, 255, 0.18);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      border-color: #00f0ff;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 240, 255, 0.15);
+    }
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #00f0ff;
+      margin-bottom: 6px;
+    }
+    .stat-title {
+      font-size: 13px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Touch & Mouse Reactive Canvas -->
+  <canvas id="neural-canvas"></canvas>
+
+  <!-- Foreground Content -->
+  <div class="content-wrapper">
+    <div class="badge interactive-element">⚡ AUTONOMOUS AI & DEVSECOPS PORTFOLIO</div>
+    
+    <h1>SAURABH MISHRA</h1>
+    <div class="subtitle">Senior Cloud Architect | Autonomous DevSecOps | FinOps</div>
+    
+    <p class="description">
+      Architecting autonomous self-healing multi-cloud landing zones, 100+ workload enterprise migrations, and policy-governed DevSecOps pipelines.
+    </p>
+
+    <div class="touch-hint interactive-element">
+      <span>✨ <b>AI Neural Touch Active:</b> Move mouse or touch anywhere on the screen to generate synaptic particle bursts & blinking neural networks!</span>
+    </div>
+
+    <div class="btn-group">
+      <a href="https://github.com/saurabh2017sln-oss" class="btn btn-primary interactive-element" target="_blank">
+        🐙 Explore GitHub Architecture
+      </a>
+      <a href="https://www.linkedin.com/in/saurabh-mishradevops-engineer/" class="btn btn-secondary interactive-element" target="_blank">
+        💼 Connect on LinkedIn
+      </a>
+      <a href="mailto:Saurabh2017sln@gmail.com" class="btn btn-secondary interactive-element">
+        📫 Contact Directly
+      </a>
+    </div>
+
+    <div class="stats-card-grid interactive-element">
+      <div class="stat-card">
+        <div class="stat-number">100+</div>
+        <div class="stat-title">Enterprise Workloads Migrated</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5+ Yrs</div>
+        <div class="stat-title">Azure & DevSecOps Consulting</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">28%</div>
+        <div class="stat-title">Average FinOps Cloud Savings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">Zero</div>
+        <div class="stat-title">Downtime Cutover Record</div>
+      </div>
+    </div>
+
+    <!-- Interactive Tools & Popup Section -->
+    <div style="margin-top: 50px;" class="interactive-element">
+      <h3 style="font-family: 'Orbitron', sans-serif; font-size: 20px; color: #00f0ff; margin-bottom: 8px;">
+        🛠️ ENTERPRISE ARCHITECT TOOLSET (CLICK FOR POPUP)
+      </h3>
+      <p style="font-size: 14px; color: #94a3b8; margin-bottom: 20px;">
+        Click any tool to pop up architectural breakdown & production application:
+      </p>
+
+      <div class="tools-grid" id="tools-grid"></div>
+    </div>
+  </div>
+
+  <!-- Interactive Tool Popup Modal -->
+  <div id="tool-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modal-badge" class="modal-badge">CLOUD PLATFORM</div>
+      <h2 id="modal-title" class="modal-title">Microsoft Azure</h2>
+      <div id="modal-subtitle" class="modal-subtitle">Enterprise Landing Zones & Cloud Adoption Framework</div>
+      <div id="modal-body" class="modal-body">
+        Architectural details loading...
+      </div>
+      <div style="margin-top: 24px; text-align: right;">
+        <button onclick="closeModal()" class="btn btn-secondary" style="padding: 8px 18px; font-size: 13px;">Close Window</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .tool-chip {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .tool-chip:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: #00f0ff;
+      color: #00f0ff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 240, 255, 0.25);
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(4, 7, 18, 0.85);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-card {
+      background: #0b112c;
+      border: 1px solid #00f0ff;
+      border-radius: 16px;
+      max-width: 540px;
+      width: 90%;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.25);
+      text-align: left;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover {
+      color: #00f0ff;
+    }
+    .modal-badge {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(168, 85, 247, 0.2);
+      border: 1px solid #a855f7;
+      color: #d8b4fe;
+      margin-bottom: 12px;
+    }
+    .modal-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .modal-subtitle {
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      color: #00f0ff;
+      margin-bottom: 18px;
+    }
+    .modal-body {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    .modal-body ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .modal-body li {
+      margin-bottom: 6px;
+    }
+  </style>
+
+  <script>
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initNodes();
+    });
+
+    // Particle nodes
+    const nodeCount = Math.floor((width * height) / 10000);
+    let nodes = [];
+    let mouse = { x: null, y: null, radius: 180, isInteracting: false };
+
+    class Node {
+      constructor(x, y) {
+        this.x = x || Math.random() * width;
+        this.y = y || Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
+        this.radius = Math.random() * 2.5 + 1.5;
+        this.baseRadius = this.radius;
+        this.color = Math.random() > 0.3 ? '#00f0ff' : '#a855f7';
+        this.blinkAlpha = Math.random();
+        this.blinkSpeed = Math.random() * 0.05 + 0.01;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        // Blinking pulsation
+        this.blinkAlpha += this.blinkSpeed;
+        if (this.blinkAlpha > 1 || this.blinkAlpha < 0.2) {
+          this.blinkSpeed *= -1;
+        }
+
+        // Mouse / Touch Interaction (Gravitational Blink)
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < mouse.radius) {
+            // Blink faster and expand when touched
+            this.radius = this.baseRadius * (1 + (1 - dist / mouse.radius) * 2.5);
+            this.blinkAlpha = 1;
+
+            const angle = Math.atan2(dy, dx);
+            this.x += Math.cos(angle) * 0.8;
+            this.y += Math.sin(angle) * 0.8;
+          } else {
+            this.radius = this.baseRadius;
+          }
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = Math.min(1, Math.max(0.1, this.blinkAlpha));
+        ctx.shadowBlur = this.radius * 4;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    // Spark Burst on Touch / Click
+    class Spark {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 5 + 2;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.03 + 0.015;
+        this.color = Math.random() > 0.5 ? '#00f0ff' : '#ff007a';
+        this.radius = Math.random() * 3 + 1.5;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= this.decay;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    let sparks = [];
+
+    function spawnBurst(x, y) {
+      for (let i = 0; i < 20; i++) {
+        sparks.push(new Spark(x, y));
+      }
+    }
+
+    function initNodes() {
+      nodes = [];
+      const count = Math.min(120, Math.max(40, Math.floor((width * height) / 12000)));
+      for (let i = 0; i < count; i++) {
+        nodes.push(new Node());
+      }
+    }
+    initNodes();
+
+    // Mouse & Touch Listeners
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    window.addEventListener('mousedown', (e) => {
+      spawnBurst(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        spawnBurst(mouse.x, mouse.y);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    // Animation Loop
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw Synaptic Connection Lines
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            const lineAlpha = (1 - dist / 120) * 0.35;
+            ctx.strokeStyle = '#00f0ff';
+            ctx.globalAlpha = lineAlpha;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw Connections to Mouse / Touch Position
+      if (mouse.x !== null && mouse.y !== null) {
+        for (let i = 0; i < nodes.length; i++) {
+          const dx = mouse.x - nodes[i].x;
+          const dy = mouse.y - nodes[i].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < mouse.radius) {
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(nodes[i].x, nodes[i].y);
+            ctx.strokeStyle = '#a855f7';
+            ctx.globalAlpha = (1 - dist / mouse.radius) * 0.7;
+            ctx.lineWidth = 1.4;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = '#a855f7';
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        }
+      }
+
+      // Update & Draw Nodes
+      for (let i = 0; i < nodes.length; i++) {
+        nodes[i].update();
+        nodes[i].draw();
+      }
+
+      // Update & Draw Touch Sparks
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        sparks[i].update();
+        sparks[i].draw();
+        if (sparks[i].alpha <= 0) {
+          sparks.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // ==========================================
+    // 🛠️ INTERACTIVE TOOL POPUP SYSTEM
+    // ==========================================
+    const toolsData = [
+      {
+        name: "Microsoft Azure",
+        category: "CLOUD PLATFORM",
+        subtitle: "Enterprise Landing Zones & Cloud Adoption Framework (CAF)",
+        desc: "Core expertise architecting 100+ workload migrations to Azure across Dev, UAT, and Prod. Implements Hub-and-Spoke networking, Azure Firewall Premium with TLS inspection, and Privileged Identity Management (PIM)."
+      },
+      {
+        name: "Terraform",
+        category: "INFRASTRUCTURE AS CODE",
+        subtitle: "Modular Parent/Child Landing Zones & Policy Enforcement",
+        desc: "Designing reusable, production-grade IaC modules with remote state locking via Azure Blob Storage, automated drift detection pipelines, Infracost budgeting, and tfsec/Checkov guardrails."
+      },
+      {
+        name: "Kubernetes (AKS)",
+        category: "ORCHESTRATION & CLOUD NATIVE",
+        subtitle: "Self-Healing Workloads & Microservices Mesh",
+        desc: "Managing high-availability Azure Kubernetes Service (AKS) clusters with private API endpoints, Azure CNI networking, OpenCost telemetry, and zero-trust pod security standards."
+      },
+      {
+        name: "Agentic AI & GenAI",
+        category: "AUTONOMOUS SYSTEMS",
+        subtitle: "Multi-Agent DevSecOps & LLM Orchestration",
+        desc: "Building autonomous AI agent loops with LangChain, CrewAI, and Azure OpenAI to automatically synthesize IaC, review security PRs, verify drift, and execute self-healing cloud remediations."
+      },
+      {
+        name: "GitHub Actions & Azure DevOps",
+        category: "CI/CD & GITOPS",
+        subtitle: "Multi-Stage Gatekeepers & Secret Governance",
+        desc: "Engineering automated trunk-based CI/CD pipelines with branch protection, CODEOWNERS validation, Trivy container scanning, automated rollbacks, and self-hosted runners."
+      },
+      {
+        name: "Checkov, Tfsec & Trivy",
+        category: "DEVSECOPS SECURITY",
+        subtitle: "Shift-Left Policy-as-Code & Vulnerability Audits",
+        desc: "Embedding automated static analysis into pull requests to enforce CIS Azure Benchmarks, catch hardcoded credentials with TruffleHog, and eliminate container CVEs before deployment."
+      },
+      {
+        name: "FinOps & Infracost",
+        category: "CLOUD FINANCIAL MANAGEMENT",
+        subtitle: "28% Average Cloud Spend Reduction",
+        desc: "Proactive PR-level cost estimates with Infracost, identifying orphan disks and unattached IPs, 1y/3y Reserved Instance strategy, and non-prod automated scheduling."
+      },
+      {
+        name: "Prometheus & Grafana",
+        category: "OBSERVABILITY & AIOPS",
+        subtitle: "Real-Time Telemetry & Smart Alerts",
+        desc: "Centralized Log Analytics Workspaces with Azure Monitor Agent (AMA) and Data Collection Rules (DCR), routing critical P1/P0 telemetry dynamically to Teams and PagerDuty."
+      },
+      {
+        name: "Ansible",
+        category: "CONFIGURATION MANAGEMENT",
+        subtitle: "Automated Host Hardening & Bastions",
+        desc: "Automated VM bootstrapping, OS security baselines, Cloud-Init integration, and reproducible middleware deployments."
+      },
+      {
+        name: "Amazon Web Services (AWS)",
+        category: "MULTI-CLOUD",
+        subtitle: "Hybrid & Multi-Cloud Connectivity",
+        desc: "Configuring VPC peering, IAM least-privilege policies, S3 lifecycle rules, and hybrid cloud disaster recovery replication."
+      }
+    ];
+
+    const toolsGrid = document.getElementById('tools-grid');
+    toolsData.forEach((tool, index) => {
+      const chip = document.createElement('div');
+      chip.className = 'tool-chip';
+      chip.innerHTML = `<span>⚡</span> <span>${tool.name}</span>`;
+      chip.onclick = () => openModal(index);
+      toolsGrid.appendChild(chip);
+    });
+
+    const modal = document.getElementById('tool-modal');
+    function openModal(index) {
+      const tool = toolsData[index];
+      document.getElementById('modal-badge').innerText = tool.category;
+      document.getElementById('modal-title').innerText = tool.name;
+      document.getElementById('modal-subtitle').innerText = tool.subtitle;
+      document.getElementById('modal-body').innerText = tool.desc;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    modal.onclick = (e) => {
+      if (e.target === modal) closeModal();
+    };
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
