@@ -94,42 +94,51 @@ I specialize in **100+ workload enterprise cloud migrations**, shift-left securi
 <!-- ======================================================== -->
 ## 🤖 Autonomous Multi-Agent DevSecOps Architecture
 
-> **Agentic Engineering Paradigm:** Transitioning from passive scripts to **autonomous, self-governing multi-agent AI systems** that design, audit, cost-evaluate, and heal cloud infrastructure in real-time.
+> **The Agentic Paradigm:** Transitioning from passive scripts to **autonomous, self-governing multi-agent AI systems** that design, audit, cost-evaluate, and heal cloud infrastructure in real-time.
 
 ```mermaid
-flowchart TD
-    subgraph UserLayer["👨‍💻 Architect & Engineer Interface"]
-        Prompt["💬 Natural Language Prompt / GitHub PR Trigger"]
-    end
+flowchart LR
+    User(["💬 Natural Language / PR Trigger"]) --> Sup["🧠 Supervisor Agent<br/><sub>Orchestrator & State Machine</sub>"]
+    Sup --> IaC["🏗️ IaC Agent<br/><sub>Terraform Synthesis</sub>"]
+    IaC --> Sec["🛡️ Security Agent<br/><sub>Checkov & OPA Policy</sub>"]
+    Sec --> Fin["💰 FinOps Agent<br/><sub>Infracost Budgeting</sub>"]
+    Fin --> Drift["🔄 Drift & Test Agent<br/><sub>Terratest & State Lock</sub>"]
+    Drift --> Target[("☁️ Azure Enterprise<br/><sub>Landing Zones & AKS</sub>")]
+    Target -.->|"Telemetry & Drift Feedback"| Sup
 
-    subgraph AgenticCore["🤖 Autonomous Agentic AI DevSecOps Engine"]
-        Supervisor["🧠 Supervisor Agent<br/><sub>Task Decomposition & State Machine</sub>"]
-        IaCAgent["🏗️ IaC Synthesis Agent<br/><sub>Terraform Modules & Terragrunt Dry Runs</sub>"]
-        SecurityAgent["🛡️ DevSecOps Guard Agent<br/><sub>Tfsec / Checkov / OPA Policy Audit</sub>"]
-        FinOpsAgent["💰 FinOps Guardian Agent<br/><sub>Infracost / Anomaly & Budget Evaluation</sub>"]
-        DriftAgent["🔄 Drift & Test Agent<br/><sub>Terratest / Drift Remediation Loop</sub>"]
-    end
-
-    subgraph CloudTarget["☁️ Multi-Region Enterprise Target (Azure / AWS)"]
-        LandingZone["🏛️ CAF Landing Zones & Hub-and-Spoke Topology"]
-        K8s["☸️ Autonomous Kubernetes Clusters (AKS)"]
-        Telemetry["📡 Real-Time AIOps & Observability Telemetry"]
-    end
-
-    Prompt --> Supervisor
-    Supervisor --> IaCAgent
-    IaCAgent --> SecurityAgent
-    SecurityAgent --> FinOpsAgent
-    FinOpsAgent --> DriftAgent
-    DriftAgent -->|"Automated Gate Passed"| LandingZone
-    LandingZone --> K8s
-    K8s --> Telemetry
-    Telemetry -->|"Anomalies & Telemetry Feedback"| Supervisor
-
-    style UserLayer fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
-    style AgenticCore fill:#11111b,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
-    style CloudTarget fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style User fill:#1e1e2e,stroke:#89b4fa,stroke-width:1.5px,color:#cdd6f4
+    style Sup fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style IaC fill:#1e1e2e,stroke:#f9e2af,stroke-width:1.5px,color:#cdd6f4
+    style Sec fill:#1e1e2e,stroke:#f38ba8,stroke-width:1.5px,color:#cdd6f4
+    style Fin fill:#1e1e2e,stroke:#00D084,stroke-width:1.5px,color:#cdd6f4
+    style Drift fill:#1e1e2e,stroke:#cba6f7,stroke-width:1.5px,color:#cdd6f4
+    style Target fill:#1e1e2e,stroke:#00F0FF,stroke-width:2px,color:#cdd6f4
 ```
+
+<div align="center">
+
+```bash
+saurabh@cloud-mesh:~$ agy agent --autonomous-run --env production
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ 🤖 AUTONOMOUS MULTI-AGENT DEVSECOPS PIPELINE                                   │
+└────────────────────────────────────────────────────────────────────────────────┘
+[01:24:02] 🧠 [SUPERVISOR] Decomposed PR #142 -> 3 microservice landing zones
+[01:24:08] 🏗️  [IAC AGENT] Synthesized Terraform Azure CAF Landing Zone v2.4
+[01:24:14] 🛡️  [SECURITY]   Checkov: 0 High/Critical | CIS Azure Benchmark: 99.1%
+[01:24:19] 💰 [FINOPS]     Infracost approved: -$3,400/mo delta (Rightsizing applied)
+[01:24:25] 🔄 [DRIFT]      Terratest passed (18 tests) | Remote State Lock Acquired
+[01:24:30] 🚀 [DEPLOY]     Zero-downtime cutover successful across 100+ workloads!
+```
+
+</div>
+
+| Agent Role | Model / Engine | Primary Mission | Integrated Tooling |
+| :--- | :--- | :--- | :--- |
+| **🧠 Supervisor Agent** | Azure OpenAI GPT-4o | Task decomposition, state machine orchestration | LangGraph, Semantic Kernel |
+| **🏗️ IaC Synthesis Agent** | Claude 3.5 Sonnet | Synthesizes reusable Terraform CAF modules | Terraform 1.5+, HCL, Azure CAF |
+| **🛡️ DevSecOps Guard Agent** | DeepSeek-R1 / GPT-4o | Enforces CIS benchmarks, secret scans & OPA rules | Checkov, Tfsec, TruffleHog, Trivy |
+| **💰 FinOps Guardian Agent** | Custom FinOps Evaluator | Pre-apply cost anomaly detection & rightsizing | Infracost API, OpenCost, Azure Advisor |
+| **🔄 Drift & Healing Agent** | AIOps Event Trigger | Detects out-of-band console drift & self-heals | Terratest, Azure Monitor AMA / DCR |
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" alt="Rainbow Animated Divider" />
@@ -326,15 +335,17 @@ flowchart TD
 In senior and lead-level evaluations, top architects stand out not through raw tool syntax, but through **strategic business acumen**, **system design maturity**, and **leadership**.
 
 ```mermaid
-graph TD
-    A["🎯 Executive Portfolio Strategy<br/><sub>How to Stand Out as an AI & Cloud Architect?</sub>"] --> B["🏗️ Production-Grade Portfolio Pillars"]
-    B --> C["📄 Metric-Driven Executive Resume<br/>• 100+ Workloads Migrated<br/>• 28% Cloud Cost Reduction<br/>• Zero Security Breaches"]
-    B --> D["💼 LinkedIn Thought Leadership<br/>• Architecture Decision Records (ADRs)<br/>• DevSecOps & AI Post-Mortems<br/>• System Design Case Studies"]
-    B --> E["🐙 Production GitHub Repository<br/>• Modular Terraform Landing Zones<br/>• Multi-Agent CI/CD Pipelines<br/>• Policy-as-Code Guardrails"]
-    B --> F["✍️ Technical Blog & ADRs<br/>• Real-World Migration Playbooks<br/>• Disaster Recovery Blueprints<br/>• FinOps Governance SOPs"]
+flowchart LR
+    Strategy["🎯 Portfolio Strategy<br/><sub>Executive Standing</sub>"] --> Resume["📄 Metric Resume<br/><sub>100+ Workloads & ROI</sub>"]
+    Strategy --> LinkedIn["💼 Thought Leadership<br/><sub>ADRs & Case Studies</sub>"]
+    Strategy --> Repos["🐙 GitHub Repos<br/><sub>Modular Landing Zones</sub>"]
+    Strategy --> Blog["✍️ Tech Architecture Blog<br/><sub>Post-Mortems & SOPs</sub>"]
 
-    style A fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
-    style B fill:#11111b,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
+    style Strategy fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style Resume fill:#181825,stroke:#a6e3a1,stroke-width:1.5px,color:#cdd6f4
+    style LinkedIn fill:#181825,stroke:#f9e2af,stroke-width:1.5px,color:#cdd6f4
+    style Repos fill:#181825,stroke:#cba6f7,stroke-width:1.5px,color:#cdd6f4
+    style Blog fill:#181825,stroke:#00D084,stroke-width:1.5px,color:#cdd6f4
 ```
 
 #### Essential Portfolio Assets
@@ -586,27 +597,18 @@ graph TD
 ### 13. Enterprise Observability & Monitoring
 
 ```mermaid
-graph TD
-    Hosts["🖥️ Workloads & Microservices<br/>(AKS, VMs, App Services, Edge)"] -->|"AMA Agent + DCR (Source Filtered)"| LAW["📊 Central Log Analytics Workspace"]
-    
-    subgraph AIOpsEngine["🧠 AIOps & Real-Time Telemetry Engine"]
-        LAW --> MetricAlerts["⚡ Metric Alert Rules (CPU, RAM, HTTP 5xx)"]
-        LAW --> LogAlerts["🔍 KQL Advanced Log Search Queries"]
-        LAW --> Anomaly["🤖 AI Anomaly Detection & Dynamic Baselining"]
-    end
+flowchart LR
+    Hosts["🖥️ Workloads<br/><sub>AKS, VMs, Edge</sub>"] -->|"AMA + DCR"| LAW["📊 Central Log<br/><sub>Analytics Workspace</sub>"]
+    LAW --> Engine["🧠 AIOps Engine<br/><sub>KQL & Dynamic Anomaly</sub>"]
+    Engine --> ActionGroup["🚨 Action Groups<br/><sub>Routing & Policies</sub>"]
+    ActionGroup --> PagerDuty["📟 PagerDuty (P0/P1)"]
+    ActionGroup --> Teams["💬 Teams / Slack"]
+    ActionGroup --> Runbook["⚙️ Self-Healing Logic Apps"]
 
-    MetricAlerts --> ActionGroup["🚨 Azure Action Groups"]
-    LogAlerts --> ActionGroup
-    Anomaly --> ActionGroup
-
-    ActionGroup -->|"High Severity Incident"| PagerDuty["📟 PagerDuty (P0/P1 On-Call)"]
-    ActionGroup -->|"Collaboration Alert"| Teams["💬 Microsoft Teams / Slack"]
-    ActionGroup -->|"Self-Healing Remediation"| Runbook["⚙️ Automated Runbooks / Logic Apps"]
-
-    style Hosts fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
-    style LAW fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
-    style AIOpsEngine fill:#11111b,stroke:#cba6f7,stroke-width:1px,color:#cdd6f4
-    style ActionGroup fill:#1e1e2e,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style Hosts fill:#1e1e2e,stroke:#89b4fa,stroke-width:1.5px,color:#cdd6f4
+    style LAW fill:#1e1e2e,stroke:#a6e3a1,stroke-width:1.5px,color:#cdd6f4
+    style Engine fill:#1e1e2e,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
+    style ActionGroup fill:#1e1e2e,stroke:#fab387,stroke-width:1.5px,color:#cdd6f4
 ```
 
 - **Azure Monitor & Log Analytics:** Centralized Log Analytics Workspace per enterprise landing zone.
