@@ -420,21 +420,9 @@ graph TD
 > [!IMPORTANT]
 > **Problem Statement:** Migrating 100+ enterprise workloads across Dev, UAT, and Production from an On-Premises Datacenter to Microsoft Azure with zero downtime and strict compliance.
 
-```mermaid
-graph LR
-    Pillars["🏛️ 10 Enterprise Scalability Pillars"] --> P1["1. 🚀 Scalable & Elastic"]
-    Pillars --> P2["2. 🛡️ Robust & Resilient"]
-    Pillars --> P3["3. 🔐 Zero-Trust Secure"]
-    Pillars --> P4["4. ⚡ High Availability"]
-    Pillars --> P5["5. 📦 Cloud-Native Portable"]
-    Pillars --> P6["6. 📜 Governed by Policy"]
-    Pillars --> P7["7. 🔄 BCP & DR Backed Up"]
-    Pillars --> P8["8. 💰 FinOps Cost-Optimized"]
-    Pillars --> P9["9. 📊 Telemetry-Monitored"]
-    Pillars --> P10["10. 🤖 Autonomous & Compliant"]
-
-    style Pillars fill:#1e1e2e,stroke:#f9e2af,stroke-width:2px,color:#cdd6f4
-```
+<div align="center">
+  <img src="./assets/animated-scalability-pillars.svg" width="100%" alt="10 Enterprise Scalability Pillars Animated Diagram" />
+</div>
 
 ---
 

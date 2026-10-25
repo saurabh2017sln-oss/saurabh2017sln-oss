@@ -1,0 +1,256 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" width="100%" height="620">
+  <defs>
+    <!-- True Pitch Black Background & Glow Filters -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur1" />
+      <feGaussianBlur stdDeviation="6" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="laserBeamGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Arrow Marker -->
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#3b4261" />
+    </marker>
+
+    <!-- Subtle Dot Grid Pattern for Tech Vibe -->
+    <pattern id="cardGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#1e2338" />
+    </pattern>
+
+    <style>
+      .base-arrow {
+        fill: none;
+        stroke: #2e3552;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+      }
+      .anim-arrow-cyan {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.2;
+        stroke-dasharray: 8 16;
+        animation: flowDash 1.4s linear infinite;
+        filter: url(#laserBeamGlow);
+      }
+      .anim-arrow-purple {
+        fill: none;
+        stroke: #C084FC;
+        stroke-width: 2.2;
+        stroke-dasharray: 8 16;
+        animation: flowDash 1.8s linear infinite;
+        filter: url(#laserBeamGlow);
+      }
+      @keyframes flowDash {
+        to {
+          stroke-dashoffset: -48;
+        }
+      }
+      .pillar-card {
+        fill: #111528;
+        stroke: #7c3aed;
+        stroke-width: 1.4;
+        transition: all 0.3s ease;
+      }
+      .pillar-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
+        fill: #E2E8F0;
+      }
+      .hub-card {
+        fill: #0c1024;
+        stroke: #00F0FF;
+        stroke-width: 2;
+        filter: url(#neonGlow);
+      }
+      .hub-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+        letter-spacing: 0.5px;
+      }
+      @keyframes hubPulse {
+        0%, 100% { stroke: #00F0FF; filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4)); }
+        50% { stroke: #C084FC; filter: drop-shadow(0 0 16px rgba(192, 132, 252, 0.7)); }
+      }
+      .hub-card-pulse {
+        animation: hubPulse 3s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- PURE JET BLACK CONTAINER -->
+  <rect width="100%" height="100%" fill="#060913" rx="14" />
+  <rect width="100%" height="100%" fill="url(#cardGrid)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC ARROWS                      -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Arrow 1 -->
+    <path d="M 220, 310 C 310, 310, 360, 48, 510, 48" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 2 -->
+    <path d="M 220, 310 C 320, 310, 370, 104, 510, 104" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 3 -->
+    <path d="M 220, 310 C 330, 310, 380, 160, 510, 160" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 4 -->
+    <path d="M 220, 310 C 340, 310, 390, 216, 510, 216" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 5 -->
+    <path d="M 220, 310 C 350, 310, 410, 272, 510, 272" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 6 -->
+    <path d="M 220, 310 C 350, 310, 410, 328, 510, 328" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 7 -->
+    <path d="M 220, 310 C 340, 310, 390, 384, 510, 384" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 8 -->
+    <path d="M 220, 310 C 330, 310, 380, 440, 510, 440" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 9 -->
+    <path d="M 220, 310 C 320, 310, 370, 496, 510, 496" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Arrow 10 -->
+    <path d="M 220, 310 C 310, 310, 360, 552, 510, 552" class="base-arrow" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED FLOWING LASER ARROWS          -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Anim Arrow 1 -->
+    <path d="M 220, 310 C 310, 310, 360, 48, 510, 48" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 2 -->
+    <path d="M 220, 310 C 320, 310, 370, 104, 510, 104" class="anim-arrow-purple" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 3 -->
+    <path d="M 220, 310 C 330, 310, 380, 160, 510, 160" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 4 -->
+    <path d="M 220, 310 C 340, 310, 390, 216, 510, 216" class="anim-arrow-purple" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 5 -->
+    <path d="M 220, 310 C 350, 310, 410, 272, 510, 272" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 6 -->
+    <path d="M 220, 310 C 350, 310, 410, 328, 510, 328" class="anim-arrow-purple" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 7 -->
+    <path d="M 220, 310 C 340, 310, 390, 384, 510, 384" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 8 -->
+    <path d="M 220, 310 C 330, 310, 380, 440, 510, 440" class="anim-arrow-purple" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 9 -->
+    <path d="M 220, 310 C 320, 310, 370, 496, 510, 496" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- Anim Arrow 10 -->
+    <path d="M 220, 310 C 310, 310, 360, 552, 510, 552" class="anim-arrow-purple" marker-end="url(#arrowCyan)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING ENERGY ORBS (DATA PACKETS)   -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Orb 1 -->
+    <circle r="3.5" fill="#FFFFFF" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 310, 310, 360, 48, 510, 48" dur="1.8s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 2 -->
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 320, 310, 370, 104, 510, 104" dur="2.1s" begin="0.3s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 3 -->
+    <circle r="3.5" fill="#FFD700" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 330, 310, 380, 160, 510, 160" dur="1.9s" begin="0.6s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 4 -->
+    <circle r="3.5" fill="#00FF88" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 340, 310, 390, 216, 510, 216" dur="2.3s" begin="0.2s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 5 -->
+    <circle r="3.5" fill="#FF007A" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 350, 310, 410, 272, 510, 272" dur="1.6s" begin="0.5s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 6 -->
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 350, 310, 410, 328, 510, 328" dur="1.7s" begin="0.1s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 7 -->
+    <circle r="3.5" fill="#A855F7" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 340, 310, 390, 384, 510, 384" dur="2.2s" begin="0.7s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 8 -->
+    <circle r="3.5" fill="#00FF88" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 330, 310, 380, 440, 510, 440" dur="2.0s" begin="0.4s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 9 -->
+    <circle r="3.5" fill="#FFD700" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 320, 310, 370, 496, 510, 496" dur="1.9s" begin="0.8s" repeatCount="indefinite" />
+    </circle>
+    <!-- Orb 10 -->
+    <circle r="3.5" fill="#FFFFFF" filter="url(#neonGlow)">
+      <animateMotion path="M 220, 310 C 310, 310, 360, 552, 510, 552" dur="2.4s" begin="0.2s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. CENTRAL HUB CARD                        -->
+  <!-- ========================================== -->
+  <g>
+    <rect x="40" y="255" width="180" height="110" rx="12" class="hub-card hub-card-pulse" />
+    <text x="130" y="285" class="hub-title" font-size="16">🏛️ 10</text>
+    <text x="130" y="308" class="hub-title" fill="#00F0FF" font-size="14">Enterprise</text>
+    <text x="130" y="328" class="hub-title" fill="#C084FC" font-size="14">Scalability</text>
+    <text x="130" y="348" class="hub-title" fill="#FFFFFF" font-size="14">Pillars</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. 10 SCALABILITY PILLAR CARDS             -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Pillar 1 -->
+    <rect x="520" y="26" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="53" class="pillar-text">1. 🚀 Scalable &amp; Elastic</text>
+
+    <!-- Pillar 2 -->
+    <rect x="520" y="82" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="109" class="pillar-text">2. 🛡️ Robust &amp; Resilient</text>
+
+    <!-- Pillar 3 -->
+    <rect x="520" y="138" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="165" class="pillar-text">3. 🔐 Zero-Trust Secure</text>
+
+    <!-- Pillar 4 -->
+    <rect x="520" y="194" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="221" class="pillar-text">4. ⚡ High Availability</text>
+
+    <!-- Pillar 5 -->
+    <rect x="520" y="250" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="277" class="pillar-text">5. 📦 Cloud-Native Portable</text>
+
+    <!-- Pillar 6 -->
+    <rect x="520" y="306" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="333" class="pillar-text">6. 📜 Governed by Policy</text>
+
+    <!-- Pillar 7 -->
+    <rect x="520" y="362" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="389" class="pillar-text">7. 🔄 BCP &amp; DR Backed Up</text>
+
+    <!-- Pillar 8 -->
+    <rect x="520" y="418" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="445" class="pillar-text">8. 💰 FinOps Cost-Optimized</text>
+
+    <!-- Pillar 9 -->
+    <rect x="520" y="474" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="501" class="pillar-text">9. 📊 Telemetry-Monitored</text>
+
+    <!-- Pillar 10 -->
+    <rect x="520" y="530" width="260" height="44" rx="8" class="pillar-card" />
+    <text x="540" y="557" class="pillar-text">10. 🤖 Autonomous &amp; Compliant</text>
+  </g>
+</svg>
