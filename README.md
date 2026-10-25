@@ -379,18 +379,9 @@ flowchart LR
 
 A senior candidate must answer first: **"What is the business? What is the functional domain?"**
 
-```mermaid
-graph TD
-    A["🧠 Senior Architect Mindset<br/><sub>'What is the Business & Functional Domain?'</sub>"] --> B["🏗️ Infrastructure & Platform Engineering"]
-    A --> C["🤖 Application & AI Systems Design"]
-
-    B --> B1["• Multi-Region Landing Zones (CAF)<br/>• DevSecOps & Policy-as-Code<br/>• Zero-Downtime Cloud Migration<br/>• Disaster Recovery & FinOps"]
-    C --> C1["• Microservices vs Event-Driven Mesh<br/>• AI Agentic Pipelines & RAG Systems<br/>• API Gateways & Edge Routing<br/>• State, Caching & Distributed Systems"]
-
-    style A fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
-    style B fill:#181825,stroke:#89b4fa,stroke-width:1px,color:#cdd6f4
-    style C fill:#181825,stroke:#cba6f7,stroke-width:1px,color:#cdd6f4
-```
+<div align="center">
+  <img src="./assets/animated-senior-mindset.svg" width="100%" alt="Senior Architect Mindset Alignment with Animated Flowing Arrows" />
+</div>
 
 #### Executive & Leadership Responsibilities
 - 🎓 **Leadership & Team Upskilling:** Leading technical KT sessions, running workshops, building hiring rubrics.
@@ -424,24 +415,9 @@ Microsoft CAF guides end-to-end cloud adoption across six iterative phases:
 
 #### Tenant & Management Group Hierarchy
 
-```mermaid
-graph TD
-    Tenant["🌐 Microsoft Entra ID Tenant"] --> Root["🏛️ Tenant Root Group"]
-    Root --> Platform["⚙️ Platform Management Group"]
-    Root --> LandingZones["🚀 Landing Zones (Workloads)"]
-    Root --> Sandboxes["🧪 Decommissioned / Sandbox"]
-
-    Platform --> Id["🔑 Identity Subscriptions (AD / DNS)"]
-    Platform --> Mgmt["📊 Management Subscriptions (Log Analytics / AMA)"]
-    Platform --> Conn["🌐 Connectivity Subscriptions (Hub VNet / Azure Firewall / ER)"]
-
-    LandingZones --> Corp["🏢 Corp (Internal Only)"]
-    LandingZones --> Online["🌍 Online (Public / DMZ)"]
-
-    Corp --> DevSub["📦 Dev Subscriptions"]
-    Corp --> UATSub["🧪 UAT Subscriptions"]
-    Corp --> ProdSub["🚀 Prod Subscriptions"]
-```
+<div align="center">
+  <img src="./assets/animated-tenant-hierarchy.svg" width="100%" alt="Tenant & Management Group Hierarchy with Animated Electric Arrows" />
+</div>
 
 #### Best Practices:
 - **Subscription Boundaries:** Segregate subscriptions strictly by environment (`Dev`, `UAT`, `Prod`) and function (`Platform` vs `Application`) to prevent noisy neighbor problems and isolate the blast radius.
@@ -452,19 +428,9 @@ graph TD
 
 ### 6. Enterprise Hub-and-Spoke Networking Architecture
 
-```mermaid
-graph TD
-    OnPrem["🏢 On-Premises Datacenter"] <== "ExpressRoute / S2S VPN Gateway" ==> Gateway["GatewaySubnet (VPN/ER Gateway)"]
-    
-    subgraph Hub["🌐 HUB VNet (Central Connectivity & Security)"]
-        Gateway
-        Firewall["🔥 Azure Firewall Premium / NVA (Inspection & TLS)"]
-        DNS["📡 Private DNS Zones (privatelink.azure.com)"]
-    end
-
-    Firewall <== "VNet Peering + UDR (0.0.0.0/0 -> FW)" ==> Spoke1["🚀 Spoke 1: App VNet<br/>• App Tier Subnet<br/>• DB Tier Subnet<br/>• Private Endpoints"]
-    Firewall <== "VNet Peering + UDR (0.0.0.0/0 -> FW)" ==> Spoke2["🛠️ Spoke 2: Shared VNet<br/>• CI/CD Self-Hosted Runners<br/>• Azure Bastion Host<br/>• Security Scanners"]
-```
+<div align="center">
+  <img src="./assets/animated-hub-spoke-network.svg" width="100%" alt="Enterprise Hub-and-Spoke Networking Architecture with Animated Laser Arrows" />
+</div>
 
 #### Key Networking Elements:
 - **IP Address Management (IPAM) & CIDR:** Comprehensive discovery and auditing of on-prem CIDRs to prevent overlapping IP address spaces with Azure VNets.
@@ -487,15 +453,9 @@ graph TD
 
 ### 8. Terraform Landing Zone Automation & Best Practices
 
-```mermaid
-flowchart LR
-    A["💻 Terraform Code"] --> B["🔍 Lint & Format<br/>(tflint / terraform fmt)"]
-    B --> C["🛡️ DevSecOps Scanners<br/>(tfsec / Checkov / Trivy)"]
-    C --> D["💰 FinOps Cost Guard<br/>(Infracost)"]
-    D --> E["📋 Terraform Plan<br/>& Drift Detection"]
-    E --> F["🚦 Manual Gate<br/>(Senior Approval)"]
-    F --> G["🚀 Terraform Apply<br/>(Blob Lease Locked State)"]
-```
+<div align="center">
+  <img src="./assets/animated-terraform-pipeline.svg" width="100%" alt="Terraform Landing Zone Pipeline with Animated Flowing Arrows" />
+</div>
 
 - **Remote State Management:** Remote state stored in private, geo-redundant Azure Storage Account with blob lease locking, encrypted with customer-managed keys, and accessed via Least Privilege Managed Identities.
 - **Modularity:** Reusable, parameterized Terraform modules with strict semantic versioning (`v1.2.0`) and modular directory separation (networking, compute, identity).
@@ -541,19 +501,9 @@ flowchart LR
 
 ### 11. FinOps (Cloud Financial Management)
 
-```mermaid
-graph TD
-    FinOps["💰 Enterprise Cloud FinOps Framework"] --> Waste["🗑️ Eliminate Waste<br/>• Orphan Disks & Snapshots<br/>• Unassociated Public IPs<br/>• Idle / Zombie Compute"]
-    FinOps --> Rightsizing["⚖️ Rightsizing Engine<br/>• 30-Day CPU/RAM P95 Profiling<br/>• Auto-Scaling Compute<br/>• Non-Prod Auto Start/Stop"]
-    FinOps --> Commit["💳 Commitment Discounts<br/>• 1-Year / 3-Year Reserved Instances<br/>• Azure Savings Plans<br/>• Spot VM Batch Processing"]
-    FinOps --> Logs["📊 Telemetry & Ingestion Tuning<br/>• Data Collection Rules (DCR)<br/>• Basic vs Analytics Tables<br/>• Cool & Archive Storage Tiers"]
-
-    style FinOps fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
-    style Waste fill:#181825,stroke:#f38ba8,stroke-width:1px,color:#cdd6f4
-    style Rightsizing fill:#181825,stroke:#f9e2af,stroke-width:1px,color:#cdd6f4
-    style Commit fill:#181825,stroke:#89b4fa,stroke-width:1px,color:#cdd6f4
-    style Logs fill:#181825,stroke:#cba6f7,stroke-width:1px,color:#cdd6f4
-```
+<div align="center">
+  <img src="./assets/animated-finops-framework.svg" width="100%" alt="Enterprise Cloud FinOps Framework with Animated Laser Arrows" />
+</div>
 
 - **Eliminate Waste:** Detect and remove unattached managed disks, obsolete snapshots, unassociated public IPs, and idle compute instances.
 - **Rightsizing:** Resize oversized VMs based on 30-day CPU/Memory utilization percentiles.

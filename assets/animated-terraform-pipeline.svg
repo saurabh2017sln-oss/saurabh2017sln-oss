@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 180" width="100%" height="180">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur1" />
+      <feGaussianBlur stdDeviation="5" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2d3748" />
+    </marker>
+
+    <pattern id="dotPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#141a2e" />
+    </pattern>
+
+    <style>
+      .base-arrow {
+        fill: none;
+        stroke: #252d47;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+      }
+      .anim-arrow-cyan {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.4;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.1s linear infinite;
+        filter: url(#neonGlow);
+      }
+      @keyframes flowDash {
+        to { stroke-dashoffset: -32; }
+      }
+      .card-box {
+        fill: #0c1022;
+        stroke-width: 1.5;
+        rx: 10;
+      }
+      .text-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 12.5px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+      .text-sub {
+        font-family: 'SF Mono', Consolas, monospace;
+        font-size: 10px;
+        fill: #94a3b8;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#dotPattern)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC ARROWS                      -->
+  <!-- ========================================== -->
+  <g>
+    <path d="M 130, 90 L 165, 90" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 295, 90 L 330, 90" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 460, 90 L 495, 90" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 625, 90 L 660, 90" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 790, 90 L 825, 90" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 955, 90 L 990, 90" class="base-arrow" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED FLOWING LASER ARROWS          -->
+  <!-- ========================================== -->
+  <g>
+    <path d="M 130, 90 L 165, 90" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 295, 90 L 330, 90" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 460, 90 L 495, 90" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 625, 90 L 660, 90" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 790, 90 L 825, 90" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 955, 90 L 990, 90" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING DATA ORBS                     -->
+  <!-- ========================================== -->
+  <g>
+    <circle r="3.5" fill="#FFFFFF" filter="url(#neonGlow)">
+      <animateMotion path="M 130, 90 L 165, 90" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 295, 90 L 330, 90" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F38BA8" filter="url(#neonGlow)">
+      <animateMotion path="M 460, 90 L 495, 90" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00D084" filter="url(#neonGlow)">
+      <animateMotion path="M 625, 90 L 660, 90" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F9E2AF" filter="url(#neonGlow)">
+      <animateMotion path="M 790, 90 L 825, 90" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#CBA6F7" filter="url(#neonGlow)">
+      <animateMotion path="M 955, 90 L 990, 90" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. PIPELINE NODES                          -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Node 1: Terraform Code -->
+    <rect x="15" y="52" width="115" height="76" class="card-box" stroke="#89b4fa" />
+    <text x="72" y="86" class="text-title">💻 Terraform</text>
+    <text x="72" y="106" class="text-sub">HCL Code</text>
+
+    <!-- Node 2: Lint & Format -->
+    <rect x="165" y="52" width="130" height="76" class="card-box" stroke="#a6e3a1" />
+    <text x="230" y="85" class="text-title">🔍 Lint &amp; Format</text>
+    <text x="230" y="105" class="text-sub">(tflint / fmt)</text>
+
+    <!-- Node 3: DevSecOps Scanners -->
+    <rect x="330" y="52" width="130" height="76" class="card-box" stroke="#f38ba8" />
+    <text x="395" y="85" class="text-title">🛡️ DevSecOps</text>
+    <text x="395" y="105" class="text-sub">Tfsec/Checkov/Trivy</text>
+
+    <!-- Node 4: FinOps Cost Guard -->
+    <rect x="495" y="52" width="130" height="76" class="card-box" stroke="#00D084" />
+    <text x="560" y="85" class="text-title">💰 FinOps Guard</text>
+    <text x="560" y="105" class="text-sub">Infracost API</text>
+
+    <!-- Node 5: Terraform Plan -->
+    <rect x="660" y="52" width="130" height="76" class="card-box" stroke="#f9e2af" />
+    <text x="725" y="85" class="text-title">📋 Plan &amp; Drift</text>
+    <text x="725" y="105" class="text-sub">Drift Detection</text>
+
+    <!-- Node 6: Manual Gate -->
+    <rect x="825" y="52" width="130" height="76" class="card-box" stroke="#fab387" />
+    <text x="890" y="85" class="text-title">🚦 Manual Gate</text>
+    <text x="890" y="105" class="text-sub">Senior Approval</text>
+
+    <!-- Node 7: Terraform Apply -->
+    <rect x="990" y="52" width="145" height="76" class="card-box" stroke="#00F0FF" />
+    <text x="1062" y="85" class="text-title" fill="#00F0FF">🚀 Apply (Blob Lock)</text>
+    <text x="1062" y="105" class="text-sub">State Leased</text>
+  </g>
+</svg>

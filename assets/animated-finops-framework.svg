@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="100%" height="480">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur1" />
+      <feGaussianBlur stdDeviation="6" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C084FC" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2d3748" />
+    </marker>
+
+    <pattern id="dotPattern" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#141a2e" />
+    </pattern>
+
+    <style>
+      .base-arrow {
+        fill: none;
+        stroke: #252d47;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+      }
+      .anim-arrow-cyan {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.5;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.2s linear infinite;
+        filter: url(#neonGlow);
+      }
+      .anim-arrow-purple {
+        fill: none;
+        stroke: #C084FC;
+        stroke-width: 2.5;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.5s linear infinite;
+        filter: url(#neonGlow);
+      }
+      @keyframes flowDash {
+        to { stroke-dashoffset: -32; }
+      }
+      .card-box {
+        fill: #0c1022;
+        stroke-width: 1.5;
+        rx: 10;
+      }
+      .text-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+      .text-bullet {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11px;
+        fill: #cbd5e1;
+      }
+      @keyframes hubPulse {
+        0%, 100% { filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.3)); }
+        50% { filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.6)); }
+      }
+      .hub-pulse {
+        animation: hubPulse 3s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#dotPattern)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC ARROWS                      -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Hub to Pillar 1 -->
+    <path d="M 400, 95 C 400, 150, 135, 150, 135, 205" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Hub to Pillar 2 -->
+    <path d="M 460, 95 C 460, 150, 380, 150, 380, 205" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Hub to Pillar 3 -->
+    <path d="M 540, 95 C 540, 150, 625, 150, 625, 205" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Hub to Pillar 4 -->
+    <path d="M 600, 95 C 600, 150, 870, 150, 870, 205" class="base-arrow" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED FLOWING LASER ARROWS          -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Anim to Pillar 1 -->
+    <path d="M 400, 95 C 400, 150, 135, 150, 135, 205" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- Anim to Pillar 2 -->
+    <path d="M 460, 95 C 460, 150, 380, 150, 380, 205" class="anim-arrow-purple" marker-end="url(#arrowPurple)" />
+    <!-- Anim to Pillar 3 -->
+    <path d="M 540, 95 C 540, 150, 625, 150, 625, 205" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- Anim to Pillar 4 -->
+    <path d="M 600, 95 C 600, 150, 870, 150, 870, 205" class="anim-arrow-purple" marker-end="url(#arrowPurple)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING DATA ORBS                     -->
+  <!-- ========================================== -->
+  <g>
+    <circle r="3.5" fill="#F38BA8" filter="url(#neonGlow)">
+      <animateMotion path="M 400, 95 C 400, 150, 135, 150, 135, 205" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F9E2AF" filter="url(#neonGlow)">
+      <animateMotion path="M 460, 95 C 460, 150, 380, 150, 380, 205" dur="1.3s" begin="0.3s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#89B4FA" filter="url(#neonGlow)">
+      <animateMotion path="M 540, 95 C 540, 150, 625, 150, 625, 205" dur="1.3s" begin="0.1s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#CBA6F7" filter="url(#neonGlow)">
+      <animateMotion path="M 600, 95 C 600, 150, 870, 150, 870, 205" dur="1.5s" begin="0.4s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. CENTRAL FINOPS HUB                      -->
+  <!-- ========================================== -->
+  <g>
+    <rect x="360" y="25" width="280" height="70" class="card-box hub-pulse" stroke="#00D084" />
+    <text x="500" y="55" class="text-title" fill="#00D084" font-size="14">💰 Enterprise Cloud</text>
+    <text x="500" y="77" class="text-title" font-size="14">FinOps Framework</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. 4 FINOPS PILLAR CARDS                   -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Card 1: Eliminate Waste -->
+    <rect x="25" y="205" width="220" height="240" class="card-box" stroke="#f38ba8" />
+    <text x="135" y="238" class="text-title" fill="#f38ba8">🗑️ Eliminate Waste</text>
+    <text x="40" y="275" class="text-bullet">• Orphan Disks</text>
+    <text x="40" y="295" class="text-bullet">  &amp; Snapshots</text>
+    <text x="40" y="335" class="text-bullet">• Unassociated</text>
+    <text x="40" y="355" class="text-bullet">  Public IPs</text>
+    <text x="40" y="395" class="text-bullet">• Idle / Zombie</text>
+    <text x="40" y="415" class="text-bullet">  Compute VMs</text>
+
+    <!-- Card 2: Rightsizing Engine -->
+    <rect x="270" y="205" width="220" height="240" class="card-box" stroke="#f9e2af" />
+    <text x="380" y="238" class="text-title" fill="#f9e2af">⚖️ Rightsizing Engine</text>
+    <text x="285" y="275" class="text-bullet">• 30-Day CPU/RAM</text>
+    <text x="285" y="295" class="text-bullet">  P95 Profiling</text>
+    <text x="285" y="335" class="text-bullet">• Auto-Scaling</text>
+    <text x="285" y="355" class="text-bullet">  Compute Nodes</text>
+    <text x="285" y="395" class="text-bullet">• Non-Prod Auto</text>
+    <text x="285" y="415" class="text-bullet">  Start/Stop Crons</text>
+
+    <!-- Card 3: Commitment Discounts -->
+    <rect x="515" y="205" width="220" height="240" class="card-box" stroke="#89b4fa" />
+    <text x="625" y="238" class="text-title" fill="#89b4fa">💳 Commitment</text>
+    <text x="625" y="258" class="text-title" font-size="11" fill="#94a3b8">Discounts &amp; Spot</text>
+    <text x="530" y="295" class="text-bullet">• 1-Year / 3-Year</text>
+    <text x="530" y="315" class="text-bullet">  Reserved Instances</text>
+    <text x="530" y="355" class="text-bullet">• Azure Savings Plans</text>
+    <text x="530" y="395" class="text-bullet">• Spot VM Batch</text>
+    <text x="530" y="415" class="text-bullet">  Processing</text>
+
+    <!-- Card 4: Telemetry & Ingestion Tuning -->
+    <rect x="760" y="205" width="220" height="240" class="card-box" stroke="#cba6f7" />
+    <text x="870" y="238" class="text-title" fill="#cba6f7">📊 Telemetry Tuning</text>
+    <text x="870" y="258" class="text-title" font-size="11" fill="#94a3b8">&amp; Ingestion Opt</text>
+    <text x="775" y="295" class="text-bullet">• Data Collection</text>
+    <text x="775" y="315" class="text-bullet">  Rules (DCR)</text>
+    <text x="775" y="355" class="text-bullet">• Basic vs Analytics</text>
+    <text x="775" y="375" class="text-bullet">  Tables</text>
+    <text x="775" y="415" class="text-bullet">• Cool &amp; Archive</text>
+    <text x="775" y="435" class="text-bullet">  Storage Tiers</text>
+  </g>
+</svg>

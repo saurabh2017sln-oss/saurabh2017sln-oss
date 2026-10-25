@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 640" width="100%" height="640">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur1" />
+      <feGaussianBlur stdDeviation="6" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C084FC" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2d3748" />
+    </marker>
+
+    <pattern id="dotPattern" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#141a2e" />
+    </pattern>
+
+    <style>
+      .base-arrow {
+        fill: none;
+        stroke: #252d47;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+      }
+      .anim-arrow-cyan {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.5;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.2s linear infinite;
+        filter: url(#neonGlow);
+      }
+      .anim-arrow-purple {
+        fill: none;
+        stroke: #C084FC;
+        stroke-width: 2.5;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.5s linear infinite;
+        filter: url(#neonGlow);
+      }
+      .anim-arrow-up {
+        fill: none;
+        stroke: #00FF88;
+        stroke-width: 2.5;
+        stroke-dasharray: 6 10;
+        animation: flowUp 1.2s linear infinite;
+        filter: url(#neonGlow);
+      }
+      @keyframes flowDash {
+        to { stroke-dashoffset: -32; }
+      }
+      @keyframes flowUp {
+        to { stroke-dashoffset: 32; }
+      }
+      .card-box {
+        fill: #0c1022;
+        stroke-width: 1.5;
+        rx: 10;
+      }
+      .hub-container {
+        fill: #080d20;
+        stroke: #00F0FF;
+        stroke-width: 1.8;
+        rx: 14;
+      }
+      .text-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+      .text-sub {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11px;
+        fill: #94a3b8;
+        text-anchor: middle;
+      }
+      .text-bullet {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11.5px;
+        fill: #cbd5e1;
+      }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#dotPattern)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC ARROWS                      -->
+  <!-- ========================================== -->
+  <g>
+    <!-- On-prem <-> Hub Gateway -->
+    <path d="M 425, 75 L 425, 175" class="base-arrow" marker-end="url(#arrowBase)" marker-start="url(#arrowBase)" />
+    <!-- FW to Spoke 1 -->
+    <path d="M 660, 265 C 660, 370, 310, 370, 310, 445" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- FW to Spoke 2 -->
+    <path d="M 700, 265 C 700, 370, 680, 370, 680, 445" class="base-arrow" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED FLOWING LASER ARROWS          -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Bidirectional flow: Hub <-> OnPrem -->
+    <path d="M 425, 175 L 425, 75" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- FW -> Spoke 1 -->
+    <path d="M 660, 265 C 660, 370, 310, 370, 310, 445" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <!-- FW -> Spoke 2 -->
+    <path d="M 700, 265 C 700, 370, 680, 370, 680, 445" class="anim-arrow-purple" marker-end="url(#arrowPurple)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING DATA ORBS                     -->
+  <!-- ========================================== -->
+  <g>
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 425, 175 L 425, 75" dur="1.2s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 660, 265 C 660, 370, 310, 370, 310, 445" dur="1.8s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#C084FC" filter="url(#neonGlow)">
+      <animateMotion path="M 700, 265 C 700, 370, 680, 370, 680, 445" dur="1.8s" begin="0.4s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. ON-PREM & GATEWAY LABEL                -->
+  <!-- ========================================== -->
+  <g>
+    <rect x="325" y="20" width="200" height="55" class="card-box" stroke="#89b4fa" />
+    <text x="425" y="45" class="text-title" fill="#89b4fa">🏢 On-Premises</text>
+    <text x="425" y="63" class="text-sub">Enterprise Datacenter</text>
+
+    <!-- VPN Gateway pill on connection -->
+    <rect x="310" y="105" width="230" height="28" rx="14" fill="#0c1024" stroke="#a6e3a1" stroke-width="1.2" />
+    <text x="425" y="123" class="text-sub" fill="#a6e3a1" font-weight="600">⚡ ExpressRoute / S2S VPN Gateway</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. HUB VNET CONTAINER                      -->
+  <!-- ========================================== -->
+  <g>
+    <rect x="50" y="155" width="750" height="150" class="hub-container" />
+    <text x="425" y="180" class="text-title" fill="#00F0FF">🌐 HUB VNet (Central Connectivity &amp; Zero-Trust Security)</text>
+
+    <!-- Subnet 1: Private DNS Zones -->
+    <rect x="75" y="200" width="200" height="85" class="card-box" stroke="#89b4fa" />
+    <text x="175" y="235" class="text-title" font-size="12">📡 Private DNS Zones</text>
+    <text x="175" y="258" class="text-sub">(privatelink.azure.com)</text>
+
+    <!-- Subnet 2: GatewaySubnet -->
+    <rect x="315" y="200" width="180" height="85" class="card-box" stroke="#a6e3a1" />
+    <text x="405" y="235" class="text-title" font-size="12">GatewaySubnet</text>
+    <text x="405" y="258" class="text-sub">(VPN / ER Gateway)</text>
+
+    <!-- Subnet 3: Azure Firewall Premium -->
+    <rect x="535" y="195" width="240" height="95" class="card-box" stroke="#f38ba8" />
+    <text x="655" y="228" class="text-title" font-size="12" fill="#f38ba8">🔥 Azure Firewall Premium</text>
+    <text x="655" y="248" class="text-sub">NVA / TLS &amp; IDPS Inspection</text>
+    <text x="655" y="268" class="text-sub">Central Egress 0.0.0.0/0</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 6. PEERING & UDR LABELS                    -->
+  <!-- ========================================== -->
+  <g>
+    <rect x="190" y="375" width="240" height="30" rx="15" fill="#0c1024" stroke="#00F0FF" stroke-width="1.2" />
+    <text x="310" y="394" class="text-sub" fill="#00F0FF">VNet Peering + UDR (0.0.0.0/0 -> FW)</text>
+
+    <rect x="560" y="375" width="240" height="30" rx="15" fill="#0c1024" stroke="#C084FC" stroke-width="1.2" />
+    <text x="680" y="394" class="text-sub" fill="#C084FC">VNet Peering + UDR (0.0.0.0/0 -> FW)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 7. SPOKE VNets                             -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Spoke 1 -->
+    <rect x="180" y="445" width="260" height="165" class="card-box" stroke="#f9e2af" />
+    <text x="310" y="475" class="text-title" fill="#f9e2af">🚀 Spoke 1: Application VNet</text>
+    <text x="205" y="510" class="text-bullet">• App Tier Subnet</text>
+    <text x="205" y="540" class="text-bullet">• DB Tier Subnet</text>
+    <text x="205" y="570" class="text-bullet">• Private Endpoints (SQL/Storage)</text>
+
+    <!-- Spoke 2 -->
+    <rect x="550" y="445" width="260" height="165" class="card-box" stroke="#cba6f7" />
+    <text x="680" y="475" class="text-title" fill="#cba6f7">🛠️ Spoke 2: Shared Services</text>
+    <text x="575" y="510" class="text-bullet">• CI/CD Self-Hosted Runners</text>
+    <text x="575" y="540" class="text-bullet">• Azure Bastion Host</text>
+    <text x="575" y="570" class="text-bullet">• Vulnerability &amp; Security Scanners</text>
+  </g>
+</svg>
