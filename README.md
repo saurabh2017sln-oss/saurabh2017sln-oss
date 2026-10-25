@@ -329,19 +329,9 @@ saurabh@cloud-mesh:~$ agy agent --autonomous-run --env production
 
 In senior and lead-level evaluations, top architects stand out not through raw tool syntax, but through **strategic business acumen**, **system design maturity**, and **leadership**.
 
-```mermaid
-flowchart LR
-    Strategy["🎯 Portfolio Strategy<br/><sub>Executive Standing</sub>"] --> Resume["📄 Metric Resume<br/><sub>100+ Workloads & ROI</sub>"]
-    Strategy --> LinkedIn["💼 Thought Leadership<br/><sub>ADRs & Case Studies</sub>"]
-    Strategy --> Repos["🐙 GitHub Repos<br/><sub>Modular Landing Zones</sub>"]
-    Strategy --> Blog["✍️ Tech Architecture Blog<br/><sub>Post-Mortems & SOPs</sub>"]
-
-    style Strategy fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
-    style Resume fill:#181825,stroke:#a6e3a1,stroke-width:1.5px,color:#cdd6f4
-    style LinkedIn fill:#181825,stroke:#f9e2af,stroke-width:1.5px,color:#cdd6f4
-    style Repos fill:#181825,stroke:#cba6f7,stroke-width:1.5px,color:#cdd6f4
-    style Blog fill:#181825,stroke:#00D084,stroke-width:1.5px,color:#cdd6f4
-```
+<div align="center">
+  <img src="./assets/animated-portfolio-strategy.svg" width="100%" alt="Portfolio Strategy Executive Standing with Animated Laser Arrows" />
+</div>
 
 #### Essential Portfolio Assets
 - 📄 **Resume:** Focus on business impact, ROI, and scale (*e.g., "Architected the migration of 100+ enterprise workloads with zero downtime and slashed monthly cloud spend by 28%"*).
@@ -353,19 +343,9 @@ flowchart LR
 
 ### 2. IT Career Tracks & Roles Matrix
 
-```mermaid
-flowchart LR
-    A["💼 Sales<br/><sub>Commercial Focus & Leads</sub>"] --> B["🤝 Pre-Sales<br/><sub>Techno-Functional Proposals</sub>"]
-    B --> C["🛡️ TAM<br/><sub>Technical Account Manager</sub>"]
-    C --> D["🏛️ Enterprise Architect<br/><sub>Infra + App Strategy & Design</sub>"]
-    D --> E["⚡ Technical Lead<br/><sub>Hands-on Execution & Governance</sub>"]
-
-    style A fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
-    style B fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
-    style C fill:#1e1e2e,stroke:#f9e2af,stroke-width:2px,color:#cdd6f4
-    style D fill:#1e1e2e,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
-    style E fill:#1e1e2e,stroke:#f38ba8,stroke-width:2px,color:#cdd6f4
-```
+<div align="center">
+  <img src="./assets/animated-career-matrix.svg" width="100%" alt="IT Career Tracks & Roles Matrix with Animated Laser Arrows" />
+</div>
 
 - **Sales:** Commercial focus, lead generation, client executive relationships, contract values.
 - **Pre-Sales (Techno-Functional):** RFPs/RFIs, POC execution, solution sizing, technical demonstrations, commercial bid models.
@@ -484,13 +464,9 @@ Microsoft CAF guides end-to-end cloud adoption across six iterative phases:
 
 ### 10. End-to-End Cloud Migration Strategy
 
-```mermaid
-flowchart LR
-    A["1️⃣ Discovery<br/>Inventory & Dependencies"] --> B["2️⃣ Assessment<br/>Compatibility & TCO/ROI"]
-    B --> C["3️⃣ Readiness<br/>Landing Zone & Foundation"]
-    C --> D["4️⃣ Cutover<br/>Downtime Window & Re-route"]
-    D --> E["5️⃣ Hypercare<br/>24x7 War Room & Tuning"]
-```
+<div align="center">
+  <img src="./assets/animated-cloud-migration.svg" width="100%" alt="End-to-End Cloud Migration Strategy with Animated Laser Arrows" />
+</div>
 
 #### Migration Checklists:
 - **Pre-Migration:** Discovery reports (Azure Migrate), dependency mapping, bandwidth sizing, target Landing Zone verification, full backup verification.
@@ -529,20 +505,9 @@ flowchart LR
 
 ### 13. Enterprise Observability & Monitoring
 
-```mermaid
-flowchart LR
-    Hosts["🖥️ Workloads<br/><sub>AKS, VMs, Edge</sub>"] -->|"AMA + DCR"| LAW["📊 Central Log<br/><sub>Analytics Workspace</sub>"]
-    LAW --> Engine["🧠 AIOps Engine<br/><sub>KQL & Dynamic Anomaly</sub>"]
-    Engine --> ActionGroup["🚨 Action Groups<br/><sub>Routing & Policies</sub>"]
-    ActionGroup --> PagerDuty["📟 PagerDuty (P0/P1)"]
-    ActionGroup --> Teams["💬 Teams / Slack"]
-    ActionGroup --> Runbook["⚙️ Self-Healing Logic Apps"]
-
-    style Hosts fill:#1e1e2e,stroke:#89b4fa,stroke-width:1.5px,color:#cdd6f4
-    style LAW fill:#1e1e2e,stroke:#a6e3a1,stroke-width:1.5px,color:#cdd6f4
-    style Engine fill:#1e1e2e,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
-    style ActionGroup fill:#1e1e2e,stroke:#fab387,stroke-width:1.5px,color:#cdd6f4
-```
+<div align="center">
+  <img src="./assets/animated-observability-monitoring.svg" width="100%" alt="Enterprise Observability & Monitoring with Animated Laser Arrows" />
+</div>
 
 - **Azure Monitor & Log Analytics:** Centralized Log Analytics Workspace per enterprise landing zone.
 - **Azure Monitor Agent (AMA):** Ingestion filtered at source via Data Collection Rules (DCR) to optimize cost and performance.

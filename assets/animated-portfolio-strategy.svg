@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" width="100%" height="480">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur1" />
+      <feGaussianBlur stdDeviation="5" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C084FC" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2d3748" />
+    </marker>
+
+    <pattern id="dotPattern" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#141a2e" />
+    </pattern>
+
+    <style>
+      .base-arrow {
+        fill: none;
+        stroke: #252d47;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+      }
+      .anim-arrow-cyan {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.4;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.2s linear infinite;
+        filter: url(#neonGlow);
+      }
+      .anim-arrow-purple {
+        fill: none;
+        stroke: #C084FC;
+        stroke-width: 2.4;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.4s linear infinite;
+        filter: url(#neonGlow);
+      }
+      @keyframes flowDash {
+        to { stroke-dashoffset: -32; }
+      }
+      .card-box {
+        fill: #0c1022;
+        stroke-width: 1.5;
+        rx: 10;
+      }
+      .text-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+      .text-sub {
+        font-family: 'SF Mono', Consolas, monospace;
+        font-size: 11px;
+        fill: #94a3b8;
+        text-anchor: middle;
+      }
+      @keyframes hubPulse {
+        0%, 100% { filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.3)); }
+        50% { filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.6)); }
+      }
+      .hub-pulse {
+        animation: hubPulse 3s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#dotPattern)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC ARROWS                      -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Hub -> Metric Resume (Card 1) -->
+    <path d="M 230, 240 C 320, 240, 360, 68, 445, 68" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Hub -> Thought Leadership (Card 2) -->
+    <path d="M 230, 240 C 330, 240, 370, 182, 445, 182" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Hub -> GitHub Repos (Card 3) -->
+    <path d="M 230, 240 C 330, 240, 370, 298, 445, 298" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Hub -> Tech Blog (Card 4) -->
+    <path d="M 230, 240 C 320, 240, 360, 412, 445, 412" class="base-arrow" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED FLOWING LASER ARROWS          -->
+  <!-- ========================================== -->
+  <g>
+    <path d="M 230, 240 C 320, 240, 360, 68, 445, 68" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 230, 240 C 330, 240, 370, 182, 445, 182" class="anim-arrow-purple" marker-end="url(#arrowPurple)" />
+    <path d="M 230, 240 C 330, 240, 370, 298, 445, 298" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 230, 240 C 320, 240, 360, 412, 445, 412" class="anim-arrow-purple" marker-end="url(#arrowPurple)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING DATA ORBS                     -->
+  <!-- ========================================== -->
+  <g>
+    <circle r="3.5" fill="#00FF88" filter="url(#neonGlow)">
+      <animateMotion path="M 230, 240 C 320, 240, 360, 68, 445, 68" dur="1.4s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F9E2AF" filter="url(#neonGlow)">
+      <animateMotion path="M 230, 240 C 330, 240, 370, 182, 445, 182" dur="1.2s" begin="0.3s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#CBA6F7" filter="url(#neonGlow)">
+      <animateMotion path="M 230, 240 C 330, 240, 370, 298, 445, 298" dur="1.2s" begin="0.1s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00D084" filter="url(#neonGlow)">
+      <animateMotion path="M 230, 240 C 320, 240, 360, 412, 445, 412" dur="1.4s" begin="0.5s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. CARDS & TEXT                            -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Central Hub Card -->
+    <rect x="35" y="195" width="195" height="90" class="card-box hub-pulse" stroke="#89b4fa" />
+    <text x="132" y="230" class="text-title" fill="#89b4fa">🎯 Portfolio</text>
+    <text x="132" y="250" class="text-title" fill="#89b4fa">Strategy</text>
+    <text x="132" y="270" class="text-sub">Executive Standing</text>
+
+    <!-- Card 1: Metric Resume -->
+    <rect x="455" y="25" width="265" height="86" class="card-box" stroke="#a6e3a1" />
+    <text x="587" y="58" class="text-title" fill="#a6e3a1">📄 Metric Resume</text>
+    <text x="587" y="82" class="text-sub">100+ Workloads Migrated &amp; ROI</text>
+
+    <!-- Card 2: Thought Leadership -->
+    <rect x="455" y="139" width="265" height="86" class="card-box" stroke="#f9e2af" />
+    <text x="587" y="172" class="text-title" fill="#f9e2af">💼 Thought Leadership</text>
+    <text x="587" y="196" class="text-sub">ADRs, Architecture Case Studies</text>
+
+    <!-- Card 3: GitHub Repos -->
+    <rect x="455" y="255" width="265" height="86" class="card-box" stroke="#cba6f7" />
+    <text x="587" y="288" class="text-title" fill="#cba6f7">🐙 GitHub Repos</text>
+    <text x="587" y="312" class="text-sub">Modular CAF Landing Zones</text>
+
+    <!-- Card 4: Tech Blog -->
+    <rect x="455" y="369" width="265" height="86" class="card-box" stroke="#00D084" />
+    <text x="587" y="402" class="text-title" fill="#00D084">✍️ Tech Blog</text>
+    <text x="587" y="426" class="text-sub">Post-Mortems, Guides &amp; SOPs</text>
+  </g>
+</svg>

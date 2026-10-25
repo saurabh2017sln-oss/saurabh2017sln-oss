@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 170" width="100%" height="170">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur1" />
+      <feGaussianBlur stdDeviation="5" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2d3748" />
+    </marker>
+
+    <pattern id="dotPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#141a2e" />
+    </pattern>
+
+    <style>
+      .base-arrow {
+        fill: none;
+        stroke: #252d47;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+      }
+      .anim-arrow-cyan {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.4;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.1s linear infinite;
+        filter: url(#neonGlow);
+      }
+      @keyframes flowDash {
+        to { stroke-dashoffset: -32; }
+      }
+      .card-box {
+        fill: #0c1022;
+        stroke-width: 1.5;
+        rx: 10;
+      }
+      .text-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+      .text-sub {
+        font-family: 'SF Mono', Consolas, monospace;
+        font-size: 10px;
+        fill: #94a3b8;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#dotPattern)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC ARROWS                      -->
+  <!-- ========================================== -->
+  <g>
+    <path d="M 180, 85 L 215, 85" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 385, 85 L 420, 85" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 585, 85 L 620, 85" class="base-arrow" marker-end="url(#arrowBase)" />
+    <path d="M 785, 85 L 820, 85" class="base-arrow" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED FLOWING LASER ARROWS          -->
+  <!-- ========================================== -->
+  <g>
+    <path d="M 180, 85 L 215, 85" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 385, 85 L 420, 85" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 585, 85 L 620, 85" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 785, 85 L 820, 85" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING DATA ORBS                     -->
+  <!-- ========================================== -->
+  <g>
+    <circle r="3.5" fill="#FFFFFF" filter="url(#neonGlow)">
+      <animateMotion path="M 180, 85 L 215, 85" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 385, 85 L 420, 85" dur="0.9s" begin="0.2s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F9E2AF" filter="url(#neonGlow)">
+      <animateMotion path="M 585, 85 L 620, 85" dur="0.9s" begin="0.4s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#CBA6F7" filter="url(#neonGlow)">
+      <animateMotion path="M 785, 85 L 820, 85" dur="0.9s" begin="0.6s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. CAREER MATRIX NODES                     -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Node 1: Sales -->
+    <rect x="20" y="46" width="160" height="78" class="card-box" stroke="#89b4fa" />
+    <text x="100" y="80" class="text-title">💼 Sales</text>
+    <text x="100" y="100" class="text-sub">Commercial Focus &amp; Leads</text>
+
+    <!-- Node 2: Pre-Sales -->
+    <rect x="220" y="46" width="165" height="78" class="card-box" stroke="#a6e3a1" />
+    <text x="302" y="80" class="text-title">🤝 Pre-Sales</text>
+    <text x="302" y="100" class="text-sub">Techno-Functional Bids</text>
+
+    <!-- Node 3: TAM -->
+    <rect x="425" y="46" width="160" height="78" class="card-box" stroke="#f9e2af" />
+    <text x="505" y="80" class="text-title">🛡️ TAM</text>
+    <text x="505" y="100" class="text-sub">Technical Account Mgr</text>
+
+    <!-- Node 4: Enterprise Architect -->
+    <rect x="625" y="46" width="160" height="78" class="card-box" stroke="#cba6f7" />
+    <text x="705" y="78" class="text-title" fill="#cba6f7">🏛️ Architect</text>
+    <text x="705" y="98" class="text-sub">Infra + App Strategy</text>
+
+    <!-- Node 5: Technical Lead -->
+    <rect x="825" y="46" width="155" height="78" class="card-box" stroke="#f38ba8" />
+    <text x="902" y="78" class="text-title" fill="#f38ba8">⚡ Technical Lead</text>
+    <text x="902" y="98" class="text-sub">Hands-on Execution</text>
+  </g>
+</svg>

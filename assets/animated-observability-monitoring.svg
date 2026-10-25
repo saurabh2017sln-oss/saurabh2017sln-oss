@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 240" width="100%" height="240">
+  <defs>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur1" />
+      <feGaussianBlur stdDeviation="5" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C084FC" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2d3748" />
+    </marker>
+
+    <pattern id="dotPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#141a2e" />
+    </pattern>
+
+    <style>
+      .base-arrow {
+        fill: none;
+        stroke: #252d47;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+      }
+      .anim-arrow-cyan {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.4;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.1s linear infinite;
+        filter: url(#neonGlow);
+      }
+      .anim-arrow-purple {
+        fill: none;
+        stroke: #C084FC;
+        stroke-width: 2.4;
+        stroke-dasharray: 6 10;
+        animation: flowDash 1.3s linear infinite;
+        filter: url(#neonGlow);
+      }
+      @keyframes flowDash {
+        to { stroke-dashoffset: -32; }
+      }
+      .card-box {
+        fill: #0c1022;
+        stroke-width: 1.5;
+        rx: 10;
+      }
+      .text-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+      .text-sub {
+        font-family: 'SF Mono', Consolas, monospace;
+        font-size: 10px;
+        fill: #94a3b8;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#dotPattern)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC ARROWS                      -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Workloads -> LAW -->
+    <path d="M 145, 120 L 235, 120" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- LAW -> AIOps -->
+    <path d="M 375, 120 L 415, 120" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- AIOps -> Action Groups -->
+    <path d="M 555, 120 L 595, 120" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Action Groups -> PagerDuty (Top) -->
+    <path d="M 735, 120 C 780, 120, 780, 50, 825, 50" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Action Groups -> Teams (Center) -->
+    <path d="M 735, 120 L 825, 120" class="base-arrow" marker-end="url(#arrowBase)" />
+    <!-- Action Groups -> Self-Healing (Bottom) -->
+    <path d="M 735, 120 C 780, 120, 780, 190, 825, 190" class="base-arrow" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED FLOWING LASER ARROWS          -->
+  <!-- ========================================== -->
+  <g>
+    <path d="M 145, 120 L 235, 120" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 375, 120 L 415, 120" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 555, 120 L 595, 120" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 735, 120 C 780, 120, 780, 50, 825, 50" class="anim-arrow-purple" marker-end="url(#arrowPurple)" />
+    <path d="M 735, 120 L 825, 120" class="anim-arrow-cyan" marker-end="url(#arrowCyan)" />
+    <path d="M 735, 120 C 780, 120, 780, 190, 825, 190" class="anim-arrow-purple" marker-end="url(#arrowPurple)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING DATA ORBS                     -->
+  <!-- ========================================== -->
+  <g>
+    <circle r="3.5" fill="#FFFFFF" filter="url(#neonGlow)">
+      <animateMotion path="M 145, 120 L 235, 120" dur="1.0s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 375, 120 L 415, 120" dur="0.8s" begin="0.2s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#CBA6F7" filter="url(#neonGlow)">
+      <animateMotion path="M 555, 120 L 595, 120" dur="0.8s" begin="0.4s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F38BA8" filter="url(#neonGlow)">
+      <animateMotion path="M 735, 120 C 780, 120, 780, 50, 825, 50" dur="1.4s" begin="0.6s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00F0FF" filter="url(#neonGlow)">
+      <animateMotion path="M 735, 120 L 825, 120" dur="1.0s" begin="0.5s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00FF88" filter="url(#neonGlow)">
+      <animateMotion path="M 735, 120 C 780, 120, 780, 190, 825, 190" dur="1.4s" begin="0.7s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. AMA + DCR PILL BADGE                    -->
+  <!-- ========================================== -->
+  <g>
+    <rect x="155" y="106" width="70" height="26" rx="6" fill="#080c1e" stroke="#00F0FF" stroke-width="1.2" />
+    <text x="190" y="123" font-family="'SF Mono', Consolas, monospace" font-size="9.5" fill="#00F0FF" font-weight="700" text-anchor="middle">
+      AMA+DCR
+    </text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. ARCHITECTURAL NODES                     -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Node 1: Workloads -->
+    <rect x="15" y="82" width="130" height="76" class="card-box" stroke="#89b4fa" />
+    <text x="80" y="115" class="text-title">🖥️ Workloads</text>
+    <text x="80" y="135" class="text-sub">AKS, VMs, Edge</text>
+
+    <!-- Node 2: Central Log Analytics -->
+    <rect x="235" y="82" width="140" height="76" class="card-box" stroke="#a6e3a1" />
+    <text x="305" y="113" class="text-title">📊 Central Log</text>
+    <text x="305" y="130" class="text-sub">Analytics Workspace</text>
+    <text x="305" y="145" class="text-sub" font-size="8.5">(Tiered Storage)</text>
+
+    <!-- Node 3: AIOps Engine -->
+    <rect x="415" y="82" width="140" height="76" class="card-box" stroke="#cba6f7" />
+    <text x="485" y="115" class="text-title">🧠 AIOps Engine</text>
+    <text x="485" y="135" class="text-sub">KQL &amp; Dynamic Anomaly</text>
+
+    <!-- Node 4: Action Groups -->
+    <rect x="595" y="82" width="140" height="76" class="card-box" stroke="#fab387" />
+    <text x="665" y="115" class="text-title">🚨 Action Groups</text>
+    <text x="665" y="135" class="text-sub">Routing &amp; Incident</text>
+
+    <!-- Target 1: PagerDuty -->
+    <rect x="830" y="20" width="150" height="58" class="card-box" stroke="#f38ba8" />
+    <text x="905" y="47" class="text-title" fill="#f38ba8">📟 PagerDuty</text>
+    <text x="905" y="65" class="text-sub">(P0 / P1 Critical)</text>
+
+    <!-- Target 2: Teams / Slack -->
+    <rect x="830" y="92" width="150" height="58" class="card-box" stroke="#89b4fa" />
+    <text x="905" y="119" class="text-title" fill="#89b4fa">💬 Teams / Slack</text>
+    <text x="905" y="137" class="text-sub">Engineers Notification</text>
+
+    <!-- Target 3: Self-Healing Logic Apps -->
+    <rect x="830" y="162" width="150" height="58" class="card-box" stroke="#00D084" />
+    <text x="905" y="189" class="text-title" fill="#00D084">⚙️ Self-Healing</text>
+    <text x="905" y="207" class="text-sub">Automated Logic Apps</text>
+  </g>
+</svg>
