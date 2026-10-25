@@ -96,24 +96,9 @@ I specialize in **100+ workload enterprise cloud migrations**, shift-left securi
 
 > **The Agentic Paradigm:** Transitioning from passive scripts to **autonomous, self-governing multi-agent AI systems** that design, audit, cost-evaluate, and heal cloud infrastructure in real-time.
 
-```mermaid
-flowchart LR
-    User(["💬 Natural Language / PR Trigger"]) --> Sup["🧠 Supervisor Agent<br/><sub>Orchestrator & State Machine</sub>"]
-    Sup --> IaC["🏗️ IaC Agent<br/><sub>Terraform Synthesis</sub>"]
-    IaC --> Sec["🛡️ Security Agent<br/><sub>Checkov & OPA Policy</sub>"]
-    Sec --> Fin["💰 FinOps Agent<br/><sub>Infracost Budgeting</sub>"]
-    Fin --> Drift["🔄 Drift & Test Agent<br/><sub>Terratest & State Lock</sub>"]
-    Drift --> Target[("☁️ Azure Enterprise<br/><sub>Landing Zones & AKS</sub>")]
-    Target -.->|"Telemetry & Drift Feedback"| Sup
-
-    style User fill:#1e1e2e,stroke:#89b4fa,stroke-width:1.5px,color:#cdd6f4
-    style Sup fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
-    style IaC fill:#1e1e2e,stroke:#f9e2af,stroke-width:1.5px,color:#cdd6f4
-    style Sec fill:#1e1e2e,stroke:#f38ba8,stroke-width:1.5px,color:#cdd6f4
-    style Fin fill:#1e1e2e,stroke:#00D084,stroke-width:1.5px,color:#cdd6f4
-    style Drift fill:#1e1e2e,stroke:#cba6f7,stroke-width:1.5px,color:#cdd6f4
-    style Target fill:#1e1e2e,stroke:#00F0FF,stroke-width:2px,color:#cdd6f4
-```
+<div align="center">
+  <img src="./assets/animated-agentic-architecture.svg" width="100%" alt="Autonomous Multi-Agent DevSecOps Architecture Flow with Animated Laser Arrows" />
+</div>
 
 <div align="center">
 

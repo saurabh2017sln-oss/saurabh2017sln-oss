@@ -1,0 +1,225 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 230" width="100%" height="230">
+  <defs>
+    <!-- Glow Filters -->
+    <filter id="laserGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur1" />
+      <feGaussianBlur stdDeviation="5" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Arrowhead Markers -->
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00F0FF" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C084FC" />
+    </marker>
+    <marker id="arrowBase" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2d3748" />
+    </marker>
+
+    <!-- Grid Pattern -->
+    <pattern id="circuitGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#141a2e" />
+    </pattern>
+
+    <style>
+      .base-link {
+        fill: none;
+        stroke: #252d47;
+        stroke-width: 2;
+        stroke-linecap: round;
+      }
+      .anim-link-forward {
+        fill: none;
+        stroke: #00F0FF;
+        stroke-width: 2.5;
+        stroke-dasharray: 6 10;
+        animation: flowRight 1.1s linear infinite;
+        filter: url(#laserGlow);
+      }
+      .anim-link-feedback {
+        fill: none;
+        stroke: #C084FC;
+        stroke-width: 2;
+        stroke-dasharray: 6 10;
+        animation: flowLeft 2.2s linear infinite;
+        filter: url(#laserGlow);
+      }
+      @keyframes flowRight {
+        to {
+          stroke-dashoffset: -32;
+        }
+      }
+      @keyframes flowLeft {
+        to {
+          stroke-dashoffset: 64;
+        }
+      }
+      .node-box {
+        fill: #0c1022;
+        stroke-width: 1.6;
+        transition: all 0.3s ease;
+      }
+      .node-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 12.5px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-anchor: middle;
+      }
+      .node-subtitle {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #94a3b8;
+        text-anchor: middle;
+      }
+      @keyframes pulseNode {
+        0%, 100% { filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.2)); }
+        50% { filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.5)); }
+      }
+      .node-pulse {
+        animation: pulseNode 3s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- PURE JET BLACK BACKGROUND -->
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#circuitGrid)" rx="14" />
+
+  <!-- ========================================== -->
+  <!-- 1. BASE STATIC LINKS                       -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Link 1: User -> Sup -->
+    <path d="M 145, 82 L 180, 82" class="base-link" marker-end="url(#arrowBase)" />
+    <!-- Link 2: Sup -> IaC -->
+    <path d="M 320, 82 L 350, 82" class="base-link" marker-end="url(#arrowBase)" />
+    <!-- Link 3: IaC -> Sec -->
+    <path d="M 485, 82 L 515, 82" class="base-link" marker-end="url(#arrowBase)" />
+    <!-- Link 4: Sec -> Fin -->
+    <path d="M 650, 82 L 680, 82" class="base-link" marker-end="url(#arrowBase)" />
+    <!-- Link 5: Fin -> Drift -->
+    <path d="M 815, 82 L 845, 82" class="base-link" marker-end="url(#arrowBase)" />
+    <!-- Link 6: Drift -> Azure -->
+    <path d="M 980, 82 L 1010, 82" class="base-link" marker-end="url(#arrowBase)" />
+    <!-- Feedback Loop: Azure -> Sup -->
+    <path d="M 1072, 120 L 1072, 185 L 252, 185 L 252, 125" class="base-link" marker-end="url(#arrowBase)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. ANIMATED LASER FLOW ARROWS             -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Flow 1 -->
+    <path d="M 145, 82 L 180, 82" class="anim-link-forward" marker-end="url(#arrowCyan)" />
+    <!-- Flow 2 -->
+    <path d="M 320, 82 L 350, 82" class="anim-link-forward" marker-end="url(#arrowCyan)" />
+    <!-- Flow 3 -->
+    <path d="M 485, 82 L 515, 82" class="anim-link-forward" marker-end="url(#arrowCyan)" />
+    <!-- Flow 4 -->
+    <path d="M 650, 82 L 680, 82" class="anim-link-forward" marker-end="url(#arrowCyan)" />
+    <!-- Flow 5 -->
+    <path d="M 815, 82 L 845, 82" class="anim-link-forward" marker-end="url(#arrowCyan)" />
+    <!-- Flow 6 -->
+    <path d="M 980, 82 L 1010, 82" class="anim-link-forward" marker-end="url(#arrowCyan)" />
+    <!-- Flow Feedback Loop (Right to Left) -->
+    <path d="M 1072, 120 L 1072, 185 L 252, 185 L 252, 125" class="anim-link-feedback" marker-end="url(#arrowPurple)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. TRAVELING DATA ORBS                     -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Orb across Pipeline -->
+    <circle r="3.5" fill="#FFFFFF" filter="url(#laserGlow)">
+      <animateMotion path="M 145, 82 L 180, 82" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animateMotion path="M 320, 82 L 350, 82" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F9E2AF" filter="url(#laserGlow)">
+      <animateMotion path="M 485, 82 L 515, 82" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#F38BA8" filter="url(#laserGlow)">
+      <animateMotion path="M 650, 82 L 680, 82" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#00D084" filter="url(#laserGlow)">
+      <animateMotion path="M 815, 82 L 845, 82" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#CBA6F7" filter="url(#laserGlow)">
+      <animateMotion path="M 980, 82 L 1010, 82" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Telemetry Feedback Return Orb -->
+    <circle r="4" fill="#00F0FF" filter="url(#laserGlow)">
+      <animateMotion path="M 1072, 120 L 1072, 185 L 252, 185 L 252, 125" dur="3.2s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3.5" fill="#C084FC" filter="url(#laserGlow)">
+      <animateMotion path="M 1072, 120 L 1072, 185 L 252, 185 L 252, 125" dur="3.2s" begin="1.6s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. FEEDBACK LOOP PILL BADGE                -->
+  <!-- ========================================== -->
+  <g>
+    <rect x="540" y="172" width="240" height="26" rx="13" fill="#0c1024" stroke="#a855f7" stroke-width="1.2" />
+    <text x="660" y="189" font-family="'SF Mono', Consolas, monospace" font-size="10.5" fill="#d8b4fe" font-weight="600" text-anchor="middle">
+      🔄 Telemetry &amp; Drift Feedback
+    </text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. ARCHITECTURAL AGENT NODES               -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Node 1: Natural Language / PR Trigger -->
+    <rect x="15" y="46" width="130" height="72" rx="36" class="node-box" stroke="#89b4fa" />
+    <text x="80" y="78" class="node-title">💬 Trigger</text>
+    <text x="80" y="98" class="node-subtitle">Natural Lang / PR</text>
+
+    <!-- Node 2: Supervisor Agent -->
+    <rect x="185" y="46" width="135" height="72" rx="10" class="node-box node-pulse" stroke="#a6e3a1" />
+    <text x="252" y="75" class="node-title">🧠 Supervisor</text>
+    <text x="252" y="95" class="node-subtitle">State Machine &amp; Plan</text>
+
+    <!-- Node 3: IaC Agent -->
+    <rect x="355" y="46" width="130" height="72" rx="10" class="node-box" stroke="#f9e2af" />
+    <text x="420" y="75" class="node-title">🏗️ IaC Agent</text>
+    <text x="420" y="95" class="node-subtitle">Terraform CAF Synth</text>
+
+    <!-- Node 4: Security Agent -->
+    <rect x="520" y="46" width="130" height="72" rx="10" class="node-box" stroke="#f38ba8" />
+    <text x="585" y="75" class="node-title">🛡️ Security Agent</text>
+    <text x="585" y="95" class="node-subtitle">Checkov &amp; OPA Policy</text>
+
+    <!-- Node 5: FinOps Agent -->
+    <rect x="685" y="46" width="130" height="72" rx="10" class="node-box" stroke="#00D084" />
+    <text x="750" y="75" class="node-title">💰 FinOps Agent</text>
+    <text x="750" y="95" class="node-subtitle">Infracost Budgeting</text>
+
+    <!-- Node 6: Drift & Test Agent -->
+    <rect x="850" y="46" width="130" height="72" rx="10" class="node-box" stroke="#cba6f7" />
+    <text x="915" y="75" class="node-title">🔄 Drift &amp; Test</text>
+    <text x="915" y="95" class="node-subtitle">Terratest &amp; State Lock</text>
+
+    <!-- Node 7: Target Cloud (Cylinder shape) -->
+    <rect x="1015" y="44" width="125" height="76" rx="14" class="node-box node-pulse" stroke="#00F0FF" />
+    <text x="1077" y="75" class="node-title">☁️ Azure Cloud</text>
+    <text x="1077" y="95" class="node-subtitle">Landing Zones &amp; AKS</text>
+  </g>
+</svg>
