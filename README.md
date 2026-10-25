@@ -32,19 +32,19 @@
 <br/><br/>
 
 <!-- ======================================================== -->
-<!-- 🌐 LIVE INTERACTIVE MOUSE-REACTIVE NEURAL GRID           -->
+<!-- 🌐 PITCH-BLACK SYNAPTIC NEURAL SCENE                     -->
 <!-- ======================================================== -->
 <a href="https://saurabh2017sln-oss.github.io" target="_blank">
-  <img src="./assets/interactive-mouse-grid.svg" width="100%" alt="Interactive Mouse-Reactive Synaptic Grid" />
+  <img src="./assets/interactive-mouse-grid.svg" width="100%" alt="Pitch-Black Interactive AI Neural Scene" />
 </a>
 
-<br/>
+<br/><br/>
 
 <a href="https://saurabh2017sln-oss.github.io" target="_blank">
-  <img src="https://img.shields.io/badge/%F0%9F%8E%AE_LAUNCH_FULLSCREEN-INTERACTIVE_AI_TOUCH_%26_PARTICLE_CANVAS-00F0FF?style=for-the-badge&logo=visualstudiocode&logoColor=black" alt="Launch Live Canvas" />
+  <img src="https://img.shields.io/badge/⚡_LAUNCH_FULLSCREEN_PITCH_BLACK_AI_CANVAS-WHEREVER_MOUSE_POINTS,_LIGHT_BLINKS!-00F0FF?style=for-the-badge&logo=visualstudiocode&logoColor=000000" alt="Launch Live Canvas" />
 </a>
 
-<p align="center"><sub>✨ <b>Pure SVG Interactive Canvas:</b> Sweep your mouse cursor across the grid above to trigger instant neural blinks & trailing synaptic glows!</sub></p>
+<p align="center"><sub>💡 <b>Live Neural Engine:</b> Click the glowing button above to launch the full-screen <b>#000000 Jet-Black Canvas</b> where real-time neon light beams follow your mouse cursor, connect to synaptic nodes, and spark on touch/click!</sub></p>
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%" alt="Rainbow Animated Divider" />
 
