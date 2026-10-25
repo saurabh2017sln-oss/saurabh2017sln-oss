@@ -155,6 +155,16 @@ saurabh@cloud-mesh:~$ agy agent --autonomous-run --env production
 
 <br/>
 
+<div align="center">
+  <a href="https://saurabh2017sln-oss.github.io/">
+    <img src="https://img.shields.io/badge/🚀_LAUNCH_LIVE_3D_HOVER_DOCK_PORTFOLIO-CLICK_HERE-00F0FF?style=for-the-badge&logo=rocket&logoColor=000000" alt="Launch Live 3D Hover Dock" />
+  </a>
+  <br/>
+  <sub>⚡ <b>Live 3D Physics Dock & Neural Canvas:</b> Experience real-time mouse-hover popup lift (translateY) & synaptic touch bursts on the live web application!</sub>
+</div>
+
+<br/>
+
 <!-- ======================================================== -->
 <!-- 🛠️ INTERACTIVE POPUP TOOLSETS (CATEGORIZED ACCORDIONS)    -->
 <!-- ======================================================== -->

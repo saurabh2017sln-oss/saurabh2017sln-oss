@@ -224,15 +224,17 @@
     </div>
 
     <!-- Interactive Tools & Popup Section -->
-    <div style="margin-top: 50px;" class="interactive-element">
-      <h3 style="font-family: 'Orbitron', sans-serif; font-size: 20px; color: #00f0ff; margin-bottom: 8px;">
-        🛠️ ENTERPRISE ARCHITECT TOOLSET (CLICK FOR POPUP)
-      </h3>
-      <p style="font-size: 14px; color: #94a3b8; margin-bottom: 20px;">
-        Click any tool to pop up architectural breakdown & production application:
+    <div style="margin-top: 60px;" class="interactive-element">
+      <div class="badge" style="margin-bottom: 12px;">🕹️ INTERACTIVE 3D DOCK & ARCHITECT TOOLSETS</div>
+      <h2 style="font-family: 'Orbitron', sans-serif; font-size: clamp(22px, 4vw, 32px); color: #ffffff; margin-bottom: 8px; letter-spacing: 1px;">
+        ENTERPRISE ARCHITECT TOOLKITS
+      </h2>
+      <p style="font-size: 15px; color: #94a3b8; max-width: 650px; margin: 0 auto 30px;">
+        Hover mouse cursor over any icon to pop up / lift upwards into 3D space. Click any tool to inspect enterprise architecture specs & production implementations.
       </p>
 
-      <div class="tools-grid" id="tools-grid"></div>
+      <!-- Category Filter Tabs -->
+      <div id="toolsets-container" class="toolsets-container"></div>
     </div>
   </div>
 
@@ -247,49 +249,133 @@
         Architectural details loading...
       </div>
       <div style="margin-top: 24px; text-align: right;">
-        <button onclick="closeModal()" class="btn btn-secondary" style="padding: 8px 18px; font-size: 13px;">Close Window</button>
+        <button onclick="closeModal()" class="btn btn-secondary" style="padding: 8px 20px; font-size: 13px;">Close Window</button>
       </div>
     </div>
   </div>
 
   <style>
-    .tools-grid {
+    .toolsets-container {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      max-width: 880px;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 950px;
       margin: 0 auto;
     }
-    .tool-chip {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(0, 240, 255, 0.25);
-      border-radius: 8px;
-      padding: 8px 14px;
-      display: inline-flex;
+    .toolset-box {
+      background: rgba(11, 17, 44, 0.65);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 14px;
+      padding: 20px 24px;
+      text-align: left;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .toolset-box:hover {
+      border-color: rgba(0, 240, 255, 0.5);
+      box-shadow: 0 8px 30px rgba(0, 240, 255, 0.12);
+    }
+    .toolset-header {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: #00f0ff;
+      margin-bottom: 16px;
+      display: flex;
       align-items: center;
       gap: 8px;
+    }
+    .toolset-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      padding-top: 15px; /* room for popup badge */
+    }
+
+    /* 🚀 THE ICON LIFT-UP POPUP EFFECT (HOVER LIFT UPWARDS) */
+    .dock-tool {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
       cursor: pointer;
-      transition: all 0.25s ease;
-      font-family: 'Fira Code', monospace;
-      font-size: 13px;
-      color: #cbd5e1;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.28s ease;
+      user-select: none;
     }
-    .tool-chip:hover {
-      background: rgba(0, 240, 255, 0.15);
-      border-color: #00f0ff;
+    .dock-tool img {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: block;
+      pointer-events: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .dock-tool.badge-style img {
+      width: auto;
+      height: 28px;
+      border-radius: 4px;
+      border: none;
+    }
+
+    /* 🚀 LIFT UPWARDS (UPPAR KO UTHE) ON HOVER */
+    .dock-tool:hover {
+      transform: translateY(-16px) scale(1.22);
+      filter: drop-shadow(0 14px 22px rgba(0, 240, 255, 0.75)) brightness(1.22);
+      z-index: 100;
+    }
+    .dock-tool.badge-style:hover {
+      transform: translateY(-10px) scale(1.12);
+      filter: drop-shadow(0 10px 18px rgba(0, 240, 255, 0.75)) brightness(1.2);
+    }
+
+    /* Floating Tooltip Tag on Hover */
+    .dock-popup-tag {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: rgba(4, 7, 24, 0.96);
+      border: 1px solid #00f0ff;
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.5);
       color: #00f0ff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 240, 255, 0.25);
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 120;
     }
+    .dock-popup-tag::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: #00f0ff transparent transparent transparent;
+    }
+    .dock-tool:hover .dock-popup-tag {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(4, 7, 18, 0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(4, 7, 18, 0.88);
+      backdrop-filter: blur(12px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -305,14 +391,14 @@
       background: #0b112c;
       border: 1px solid #00f0ff;
       border-radius: 16px;
-      max-width: 540px;
+      max-width: 560px;
       width: 90%;
       padding: 32px;
       position: relative;
-      box-shadow: 0 0 50px rgba(0, 240, 255, 0.25);
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.3);
       text-align: left;
       transform: scale(0.9);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .modal-overlay.active .modal-card {
       transform: scale(1);
@@ -607,83 +693,423 @@
     animate();
 
     // ==========================================
-    // 🛠️ INTERACTIVE TOOL POPUP SYSTEM
+    // 🛠️ 7 CATEGORIZED TOOLSETS WITH 3D HOVER LIFT & POPUP
     // ==========================================
-    const toolsData = [
+    const toolsetsData = [
       {
-        name: "Microsoft Azure",
-        category: "CLOUD PLATFORM",
-        subtitle: "Enterprise Landing Zones & Cloud Adoption Framework (CAF)",
-        desc: "Core expertise architecting 100+ workload migrations to Azure across Dev, UAT, and Prod. Implements Hub-and-Spoke networking, Azure Firewall Premium with TLS inspection, and Privileged Identity Management (PIM)."
+        id: "set-1",
+        title: "☁️ Set 1: Multi-Cloud Platforms & Landing Zones",
+        tools: [
+          {
+            name: "Microsoft Azure",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=azure&theme=dark",
+            category: "CLOUD PLATFORM",
+            subtitle: "Enterprise Landing Zones & Cloud Adoption Framework (CAF)",
+            desc: "Architected 100+ workload migrations to Azure across Dev, UAT, and Prod. Designed Hub-and-Spoke virtual networks, Azure Firewall Premium with TLS inspection, and Privileged Identity Management (PIM)."
+          },
+          {
+            name: "Amazon Web Services",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=aws&theme=dark",
+            category: "CLOUD PLATFORM",
+            subtitle: "Multi-Cloud Infrastructure & Disaster Recovery",
+            desc: "Designed cross-cloud VPC peering, IAM least-privilege boundary policies, S3 lifecycle archival rules, and hybrid cloud disaster recovery failovers."
+          },
+          {
+            name: "Google Cloud Platform",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=gcp&theme=dark",
+            category: "CLOUD PLATFORM",
+            subtitle: "Hybrid Compute & BigQuery Analytics",
+            desc: "Configured multi-project GCP shared VPC topologies, IAM workload identity federation with Azure AD, and Anthos hybrid management."
+          },
+          {
+            name: "Cloudflare",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=cloudflare&theme=dark",
+            category: "EDGE SECURITY",
+            subtitle: "WAF, DDoS Mitigation & Zero Trust Access",
+            desc: "Implemented Cloudflare Edge WAF rulesets, DNSSEC, Bot Management, and Zero Trust Tunnels to securely expose private internal microservices."
+          }
+        ]
       },
       {
-        name: "Terraform",
-        category: "INFRASTRUCTURE AS CODE",
-        subtitle: "Modular Parent/Child Landing Zones & Policy Enforcement",
-        desc: "Designing reusable, production-grade IaC modules with remote state locking via Azure Blob Storage, automated drift detection pipelines, Infracost budgeting, and tfsec/Checkov guardrails."
+        id: "set-2",
+        title: "🏗️ Set 2: Infrastructure as Code (IaC) & Container Orchestration",
+        tools: [
+          {
+            name: "Terraform",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=terraform&theme=dark",
+            category: "INFRASTRUCTURE AS CODE",
+            subtitle: "Modular Parent/Child CAF Landing Zones & Policy Enforcement",
+            desc: "Created reusable Terraform modules with remote state locking in Azure Blob Storage, automated drift detection pipelines, Infracost budgeting, and tfsec guardrails."
+          },
+          {
+            name: "Ansible",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=ansible&theme=dark",
+            category: "CONFIGURATION MANAGEMENT",
+            subtitle: "Automated Host Hardening & Bastions",
+            desc: "Automated VM bootstrapping, OS security baselines, Cloud-Init integration, and reproducible middleware deployments."
+          },
+          {
+            name: "Kubernetes",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=kubernetes&theme=dark",
+            category: "CONTAINER ORCHESTRATION",
+            subtitle: "Production AKS Clusters & Self-Healing Mesh",
+            desc: "Engineered high-availability Azure Kubernetes Service (AKS) clusters with private API endpoints, Azure CNI networking, OpenCost telemetry, and zero-trust pod security standards."
+          },
+          {
+            name: "Docker",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=docker&theme=dark",
+            category: "CONTAINERIZATION",
+            subtitle: "Immutable Microservices & Multi-Stage Builds",
+            desc: "Constructed minimal distroless Docker images, cutting attack surfaces by 85% and speeding container build times in CI/CD pipelines."
+          },
+          {
+            name: "NGINX",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=nginx&theme=dark",
+            category: "EDGE ROUTING",
+            subtitle: "Ingress Controller & SSL Reverse Proxy",
+            desc: "Configured high-throughput NGINX ingress controllers, path-based routing, upstream health checks, and mutual TLS (mTLS) termination."
+          }
+        ]
       },
       {
-        name: "Kubernetes (AKS)",
-        category: "ORCHESTRATION & CLOUD NATIVE",
-        subtitle: "Self-Healing Workloads & Microservices Mesh",
-        desc: "Managing high-availability Azure Kubernetes Service (AKS) clusters with private API endpoints, Azure CNI networking, OpenCost telemetry, and zero-trust pod security standards."
+        id: "set-3",
+        title: "🔁 Set 3: Enterprise CI/CD, GitOps & Version Control",
+        tools: [
+          {
+            name: "GitHub Actions",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=githubactions&theme=dark",
+            category: "AUTOMATION & CI/CD",
+            subtitle: "Multi-Stage Matrix Pipelines & Self-Hosted Runners",
+            desc: "Designed reusable workflow templates, automated branch validation, environment protection rules, and OIDC passwordless cloud authentication."
+          },
+          {
+            name: "Jenkins",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=jenkins&theme=dark",
+            category: "ENTERPRISE CI/CD",
+            subtitle: "Declarative Pipeline Orchestration & Distributed Agents",
+            desc: "Automated legacy-to-cloud migration pipelines with Jenkins declarative scripts, blue/green deployment stages, and webhook triggers."
+          },
+          {
+            name: "GitLab CI/CD",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=gitlab&theme=dark",
+            category: "DEVOPS PLATFORM",
+            subtitle: "Integrated Container Registry & Security Auditing",
+            desc: "Managed self-managed GitLab runners, SAST/DAST pipeline gates, and automated release changelog generation."
+          },
+          {
+            name: "Git",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=git&theme=dark",
+            category: "VERSION CONTROL",
+            subtitle: "Trunk-Based Branching & Governance",
+            desc: "Enforced git workflows, signed GPG commits, rebase strategies, and protected main branches to eliminate merge conflicts."
+          },
+          {
+            name: "GitHub Enterprise",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=github&theme=dark",
+            category: "SOURCE CONTROL & GOVERNANCE",
+            subtitle: "CODEOWNERS & Security Advisory Automation",
+            desc: "Implemented organization-wide branch rulesets, Dependabot secret scanning, and automated security vulnerability alerts."
+          }
+        ]
       },
       {
-        name: "Agentic AI & GenAI",
-        category: "AUTONOMOUS SYSTEMS",
-        subtitle: "Multi-Agent DevSecOps & LLM Orchestration",
-        desc: "Building autonomous AI agent loops with LangChain, CrewAI, and Azure OpenAI to automatically synthesize IaC, review security PRs, verify drift, and execute self-healing cloud remediations."
+        id: "set-4",
+        title: "🤖 Set 4: Agentic AI, GenAI & Autonomous Workflows",
+        tools: [
+          {
+            name: "Python",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=py&theme=dark",
+            category: "AI & AUTOMATION",
+            subtitle: "Core Language for AI Agents & Cloud SDKs",
+            desc: "Authored production automation scripts, custom LangChain tools, and Azure SDK cloud provisioning bots in modern Python 3.12."
+          },
+          {
+            name: "FastAPI",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=fastapi&theme=dark",
+            category: "AI MICROSERVICES",
+            subtitle: "Asynchronous High-Throughput REST Endpoints",
+            desc: "Built sub-millisecond asynchronous API microservices serving real-time LLM inference, embedding queries, and cloud audit logs."
+          },
+          {
+            name: "PyTorch",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=pytorch&theme=dark",
+            category: "DEEP LEARNING",
+            subtitle: "Neural Network Modeling & GPU Inference",
+            desc: "Fine-tuned transformer models, optimized CUDA tensor operations, and deployed self-hosted inference servers."
+          },
+          {
+            name: "LangChain",
+            type: "badge",
+            src: "https://img.shields.io/badge/LangChain-Autonomous_Agents-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white",
+            category: "AGENT FRAMEWORK",
+            subtitle: "Agentic Chains & Memory Management",
+            desc: "Constructed multi-turn autonomous DevOps assistants with ReAct reasoning loops, dynamic tool calling, and structured output parsing."
+          },
+          {
+            name: "Azure OpenAI",
+            type: "badge",
+            src: "https://img.shields.io/badge/Azure_OpenAI-Enterprise_LLMs-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white",
+            category: "ENTERPRISE LLM",
+            subtitle: "Private GPT-4o Instances & Enterprise SLA",
+            desc: "Integrated Azure OpenAI private endpoints with RBAC authorization, token rate-limiting, and zero-data-retention compliance."
+          },
+          {
+            name: "CrewAI",
+            type: "badge",
+            src: "https://img.shields.io/badge/CrewAI-Multi_Agent_Workflows-FF4B4B?style=for-the-badge",
+            category: "MULTI-AGENT SWARM",
+            subtitle: "Role-Playing Agent Collaboration",
+            desc: "Orchestrated collaborative agent swarms (Architect, Security Auditor, Coder, Reviewer) to autonomously build and verify IaC."
+          },
+          {
+            name: "Vector DB (Qdrant / Chroma)",
+            type: "badge",
+            src: "https://img.shields.io/badge/Vector_DB-Qdrant_%2F_Chroma-8B5CF6?style=for-the-badge",
+            category: "RAG ARCHITECTURE",
+            subtitle: "Semantic Retrieval & Vector Indexing",
+            desc: "Built hybrid dense/sparse vector search indices for corporate compliance documentation, enabling real-time RAG question answering."
+          },
+          {
+            name: "Ollama",
+            type: "badge",
+            src: "https://img.shields.io/badge/Ollama-Local_LLM_Inference-000000?style=for-the-badge",
+            category: "LOCAL INFERENCE",
+            subtitle: "Air-Gapped Local LLM Deployment",
+            desc: "Ran quantized Llama 3 and Mistral models locally for confidential code generation and automated commit linting without cloud dependencies."
+          }
+        ]
       },
       {
-        name: "GitHub Actions & Azure DevOps",
-        category: "CI/CD & GITOPS",
-        subtitle: "Multi-Stage Gatekeepers & Secret Governance",
-        desc: "Engineering automated trunk-based CI/CD pipelines with branch protection, CODEOWNERS validation, Trivy container scanning, automated rollbacks, and self-hosted runners."
+        id: "set-5",
+        title: "🔐 Set 5: DevSecOps, Shift-Left & Security Gatekeepers",
+        tools: [
+          {
+            name: "Tfsec",
+            type: "badge",
+            src: "https://img.shields.io/badge/Tfsec-Static_IaC_Scanner-1A1A1A?style=for-the-badge&logo=hashicorp&logoColor=white",
+            category: "DEVSECOPS SECURITY",
+            subtitle: "Static IaC Code Analysis & Guardrails",
+            desc: "Integrated tfsec into CI/CD pipelines to catch open ingress rules, unencrypted storage accounts, and public buckets before terraform apply."
+          },
+          {
+            name: "Checkov",
+            type: "badge",
+            src: "https://img.shields.io/badge/Checkov-Policy_as_Code-2496ED?style=for-the-badge",
+            category: "POLICY AS CODE",
+            subtitle: "CIS Benchmark Audits & Compliance",
+            desc: "Enforced CIS Azure & AWS Foundation Benchmarks across Terraform, Helm charts, and Kubernetes YAML manifests."
+          },
+          {
+            name: "Trivy",
+            type: "badge",
+            src: "https://img.shields.io/badge/Trivy-Container_Vulnerability_Scan-1904DA?style=for-the-badge",
+            category: "CONTAINER SECURITY",
+            subtitle: "Zero-CVE Image Scanning in Registry",
+            desc: "Automated vulnerability scanning across OS packages and application dependencies, halting builds on CRITICAL or HIGH CVE findings."
+          },
+          {
+            name: "TruffleHog",
+            type: "badge",
+            src: "https://img.shields.io/badge/TruffleHog-Secret_Leak_Detection-000000?style=for-the-badge",
+            category: "SECRET HYGIENE",
+            subtitle: "Pre-Commit & Pipeline Secret Scanners",
+            desc: "Prevented leaked API tokens, private keys, and connection strings from entering git history through pre-commit hooks."
+          },
+          {
+            name: "HashiCorp Vault",
+            type: "badge",
+            src: "https://img.shields.io/badge/HashiCorp_Vault-Secret_Management-000000?style=for-the-badge&logo=vault&logoColor=white",
+            category: "SECRET MANAGEMENT",
+            subtitle: "Dynamic Ephemeral Credentials & Encryption",
+            desc: "Configured Vault KV engines, AppRole authentication for CI/CD runners, and automated 30-day credential rotation."
+          },
+          {
+            name: "SonarQube",
+            type: "badge",
+            src: "https://img.shields.io/badge/SonarQube-Code_Quality_Gates-4E9BCD?style=for-the-badge&logo=sonarqube&logoColor=white",
+            category: "CODE QUALITY",
+            subtitle: "Static Code Analysis & Technical Debt Reduction",
+            desc: "Enforced code quality gates, code smells remediation, and unit test coverage thresholds across all application microservices."
+          }
+        ]
       },
       {
-        name: "Checkov, Tfsec & Trivy",
-        category: "DEVSECOPS SECURITY",
-        subtitle: "Shift-Left Policy-as-Code & Vulnerability Audits",
-        desc: "Embedding automated static analysis into pull requests to enforce CIS Azure Benchmarks, catch hardcoded credentials with TruffleHog, and eliminate container CVEs before deployment."
+        id: "set-6",
+        title: "📊 Set 6: Observability, FinOps & Cloud Telemetry",
+        tools: [
+          {
+            name: "Prometheus",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=prometheus&theme=dark",
+            category: "OBSERVABILITY",
+            subtitle: "Time-Series Metrics Collection & Alertmanager",
+            desc: "Deployed Prometheus Operator with custom ServiceMonitors, scraping sub-second container CPU/memory telemetry across production AKS."
+          },
+          {
+            name: "Grafana",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=grafana&theme=dark",
+            category: "DASHBOARDING",
+            subtitle: "Single-Pane-of-Glass Executive & DevOps Views",
+            desc: "Engineered real-time dashboards visualizing cluster health, HTTP error rate spikes, P99 latency percentiles, and FinOps costs."
+          },
+          {
+            name: "Azure Monitor & Log Analytics",
+            type: "badge",
+            src: "https://img.shields.io/badge/Azure_Monitor-Central_Log_Analytics-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white",
+            category: "TELEMETRY",
+            subtitle: "Data Collection Rules & KQL Queries",
+            desc: "Configured centralized Log Analytics Workspaces with Azure Monitor Agent (AMA) and automated KQL alerting for security anomalies."
+          },
+          {
+            name: "Infracost",
+            type: "badge",
+            src: "https://img.shields.io/badge/Infracost-Shift_Left_FinOps-00D084?style=for-the-badge",
+            category: "FINOPS",
+            subtitle: "PR-Level Cost Breakdown Before Deployment",
+            desc: "Shifted cloud cost visibility into developer pull requests, automatically detecting cost spikes and rightsizing cloud resources."
+          },
+          {
+            name: "OpenCost",
+            type: "badge",
+            src: "https://img.shields.io/badge/OpenCost-Kubernetes_Cost_Visibility-00ADD8?style=for-the-badge",
+            category: "KUBERNETES FINOPS",
+            subtitle: "Namespace & Workload Cost Allocation",
+            desc: "Monitored microservices resource allocation, tracking idle capacity costs and driving a 28% infrastructure bill reduction."
+          }
+        ]
       },
       {
-        name: "FinOps & Infracost",
-        category: "CLOUD FINANCIAL MANAGEMENT",
-        subtitle: "28% Average Cloud Spend Reduction",
-        desc: "Proactive PR-level cost estimates with Infracost, identifying orphan disks and unattached IPs, 1y/3y Reserved Instance strategy, and non-prod automated scheduling."
-      },
-      {
-        name: "Prometheus & Grafana",
-        category: "OBSERVABILITY & AIOPS",
-        subtitle: "Real-Time Telemetry & Smart Alerts",
-        desc: "Centralized Log Analytics Workspaces with Azure Monitor Agent (AMA) and Data Collection Rules (DCR), routing critical P1/P0 telemetry dynamically to Teams and PagerDuty."
-      },
-      {
-        name: "Ansible",
-        category: "CONFIGURATION MANAGEMENT",
-        subtitle: "Automated Host Hardening & Bastions",
-        desc: "Automated VM bootstrapping, OS security baselines, Cloud-Init integration, and reproducible middleware deployments."
-      },
-      {
-        name: "Amazon Web Services (AWS)",
-        category: "MULTI-CLOUD",
-        subtitle: "Hybrid & Multi-Cloud Connectivity",
-        desc: "Configuring VPC peering, IAM least-privilege policies, S3 lifecycle rules, and hybrid cloud disaster recovery replication."
+        id: "set-7",
+        title: "💻 Set 7: OS, Automation Scripting & Distributed Data Stores",
+        tools: [
+          {
+            name: "Linux",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=linux&theme=dark",
+            category: "OPERATING SYSTEM",
+            subtitle: "Enterprise Server Baselines & Hardening",
+            desc: "Kernel tuning (sysctl), systemd service management, SELinux/AppArmor profiles, and automated patching across 200+ instances."
+          },
+          {
+            name: "Ubuntu",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=ubuntu&theme=dark",
+            category: "OS & RUNNERS",
+            subtitle: "Standard Compute VMs & CI Runners",
+            desc: "Standardized immutable base AMIs and golden images for Ubuntu 22.04 LTS with automated Packer pipelines."
+          },
+          {
+            name: "Windows Server",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=windows&theme=dark",
+            category: "ENTERPRISE OS",
+            subtitle: "Active Directory, IIS & Windows Runners",
+            desc: "Managed Windows-based legacy workloads, hybrid AD synchronization, PowerShell DSC, and hybrid Entra ID joins."
+          },
+          {
+            name: "Bash",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=bash&theme=dark",
+            category: "SHELL AUTOMATION",
+            subtitle: "Cloud-Init Bootstrapping & Linux Tooling",
+            desc: "Wrote hardened Bash automation utilities with set -euo pipefail, trap handlers, and logging for zero-failure runner tasks."
+          },
+          {
+            name: "PowerShell",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=powershell&theme=dark",
+            category: "SCRIPTING & AUTOMATION",
+            subtitle: "Azure Az Modules & System Admin",
+            desc: "Developed PowerShell runbooks for Azure Automation Accounts, scheduling auto-shutdown for non-prod environments to save costs."
+          },
+          {
+            name: "PostgreSQL",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=postgres&theme=dark",
+            category: "RELATIONAL DATABASE",
+            subtitle: "ACID High-Availability & Azure Flexible Server",
+            desc: "Designed automated backup policies, connection pooling with PgBouncer, index tuning, and cross-region read replicas."
+          },
+          {
+            name: "Redis",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=redis&theme=dark",
+            category: "DISTRIBUTED CACHE",
+            subtitle: "In-Memory Session Caching & Message Broker",
+            desc: "Configured Redis Enterprise clusters with clustering and sentinel failover, reducing database read latency by 90%."
+          },
+          {
+            name: "Visual Studio Code",
+            type: "icon",
+            src: "https://skillicons.dev/icons?i=vscode&theme=dark",
+            category: "IDE & DEVELOPMENT",
+            subtitle: "Primary Cloud Architecture & Coding Environment",
+            desc: "Optimized multi-language dev environment configured with Dev Containers, HashiCorp Terraform language server, and GitHub Copilot."
+          }
+        ]
       }
     ];
 
-    const toolsGrid = document.getElementById('tools-grid');
-    toolsData.forEach((tool, index) => {
-      const chip = document.createElement('div');
-      chip.className = 'tool-chip';
-      chip.innerHTML = `<span>⚡</span> <span>${tool.name}</span>`;
-      chip.onclick = () => openModal(index);
-      toolsGrid.appendChild(chip);
+    // Render Categorized Sets into UI
+    const container = document.getElementById('toolsets-container');
+    
+    toolsetsData.forEach(set => {
+      const box = document.createElement('div');
+      box.className = 'toolset-box';
+
+      const header = document.createElement('div');
+      header.className = 'toolset-header';
+      header.innerText = set.title;
+      box.appendChild(header);
+
+      const grid = document.createElement('div');
+      grid.className = 'toolset-grid';
+
+      set.tools.forEach(tool => {
+        const item = document.createElement('div');
+        item.className = tool.type === 'badge' ? 'dock-tool badge-style' : 'dock-tool';
+        
+        // Floating cyber popup tag above the icon
+        const tag = document.createElement('div');
+        tag.className = 'dock-popup-tag';
+        tag.innerText = tool.name;
+        item.appendChild(tag);
+
+        // Icon Image
+        const img = document.createElement('img');
+        img.src = tool.src;
+        img.alt = tool.name;
+        item.appendChild(img);
+
+        // Click to Open Modal
+        item.onclick = () => openModal(tool);
+        grid.appendChild(item);
+      });
+
+      box.appendChild(grid);
+      container.appendChild(box);
     });
 
     const modal = document.getElementById('tool-modal');
-    function openModal(index) {
-      const tool = toolsData[index];
+    function openModal(tool) {
       document.getElementById('modal-badge').innerText = tool.category;
       document.getElementById('modal-title').innerText = tool.name;
       document.getElementById('modal-subtitle').innerText = tool.subtitle;
