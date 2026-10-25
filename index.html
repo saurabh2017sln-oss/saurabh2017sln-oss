@@ -202,6 +202,11 @@
       <a href="mailto:Saurabh2017sln@gmail.com" class="btn btn-secondary interactive-element">
         📫 Contact Directly
       </a>
+      <button id="like-btn" class="btn interactive-element" onclick="triggerProfileLike(event)" style="background: linear-gradient(135deg, rgba(255, 0, 85, 0.28), rgba(168, 85, 247, 0.28)); border: 1.5px solid #FF0055; color: #FFFFFF; box-shadow: 0 0 22px rgba(255, 0, 85, 0.4); cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+        <span id="like-heart" style="display:inline-block; transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);">❤️</span>
+        <span id="like-label">Like Profile</span>
+        <span id="like-badge" style="background:#FF0055; color:#fff; font-size:11px; padding:2px 8px; border-radius:12px; font-weight:700;">148</span>
+      </button>
     </div>
 
     <div class="stats-card-grid interactive-element">
@@ -1128,6 +1133,45 @@
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeModal();
     });
+
+    // ==========================================
+    // ❤️ INTERACTIVE PROFILE LIKE & STAR HANDLER
+    // ==========================================
+    let likes = parseInt(localStorage.getItem('saurabh_profile_likes') || '148', 10);
+    let hasLiked = localStorage.getItem('saurabh_profile_has_liked') === 'true';
+
+    const likeBadge = document.getElementById('like-badge');
+    const likeLabel = document.getElementById('like-label');
+    const likeHeart = document.getElementById('like-heart');
+
+    if (hasLiked) {
+      likeBadge.innerText = likes;
+      likeLabel.innerText = "Liked! ⭐";
+      likeHeart.style.transform = "scale(1.25)";
+    } else {
+      likeBadge.innerText = likes;
+    }
+
+    function triggerProfileLike(e) {
+      if (!hasLiked) {
+        likes++;
+        hasLiked = true;
+        localStorage.setItem('saurabh_profile_likes', likes);
+        localStorage.setItem('saurabh_profile_has_liked', 'true');
+        likeBadge.innerText = likes;
+        likeLabel.innerText = "Liked! ⭐";
+        likeHeart.style.transform = "scale(1.45)";
+        setTimeout(() => { likeHeart.style.transform = "scale(1.2)"; }, 300);
+
+        // Burst neural sparks
+        if (typeof spawnBurst === 'function' && e) {
+          spawnBurst(e.clientX || window.innerWidth / 2, e.clientY || 200);
+          setTimeout(() => spawnBurst((e.clientX || window.innerWidth / 2) + 25, (e.clientY || 200) - 15), 120);
+        }
+      }
+      // Open GitHub profile repo to give official Star
+      window.open('https://github.com/saurabh2017sln-oss/saurabh2017sln-oss/stargazers', '_blank');
+    }
   </script>
 </body>
 </html>

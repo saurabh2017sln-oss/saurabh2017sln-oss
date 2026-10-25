@@ -620,6 +620,35 @@ Senior engineers and architects regularly evaluate, negotiate with, and govern e
 
 <br/><br/>
 
+<!-- ======================================================== -->
+<!-- ❤️ LIKE & SHOW YOUR APPRECIATION                         -->
+<!-- ======================================================== -->
+<div align="center">
+
+<a href="https://github.com/saurabh2017sln-oss/saurabh2017sln-oss/stargazers" target="_blank">
+  <img src="./assets/animated-like-card.svg" width="100%" alt="Like and Star this Profile" />
+</a>
+
+<br/>
+
+<!-- Direct 1-Click Like & Feedback Badges -->
+<a href="https://github.com/saurabh2017sln-oss/saurabh2017sln-oss/stargazers" target="_blank">
+  <img src="https://img.shields.io/badge/❤️_LIKE_PROFILE-STAR_THIS_REPO_⭐-FF0055?style=for-the-badge&logo=github&logoColor=white" alt="Like Profile Star This Repo" />
+</a>
+<a href="https://github.com/saurabh2017sln-oss/saurabh2017sln-oss/stargazers" target="_blank">
+  <img src="https://img.shields.io/github/stars/saurabh2017sln-oss/saurabh2017sln-oss?style=for-the-badge&color=FFB703&logo=apachespark&logoColor=white&label=LIKES%20%2F%20STARS" alt="Total Likes / Stars" />
+</a>
+<a href="https://github.com/saurabh2017sln-oss/saurabh2017sln-oss/issues/new?title=%E2%9D%A4%EF%B8%8F+Liked+your+GitHub+profile%21&body=%F0%9F%91%8D+Hey+Saurabh%2C+I+really+liked+your+GitHub+profile+and+enterprise+architecture+blueprints%21+Keep+up+the+awesome+work%21+%E2%AD%90" target="_blank">
+  <img src="https://img.shields.io/badge/💬_DROP_A_LIKE-SAY_HI_👋-7928CA?style=for-the-badge&logo=githubdiscussions&logoColor=white" alt="Drop a Like and Say Hi" />
+</a>
+<a href="https://github.com/saurabh2017sln-oss/saurabh2017sln-oss" target="_blank">
+  <img src="https://komarev.com/ghpvc/?username=saurabh2017sln-oss&color=00F0FF&style=for-the-badge&label=PROFILE%20VIEWS%20%F0%9F%91%80" alt="Profile Views" />
+</a>
+
+</div>
+
+<br/><br/>
+
 ⭐ *Always pushing the boundaries of Cloud Native engineering, Agentic AI, and Autonomous Platform Engineering.*
 
 <br/>
