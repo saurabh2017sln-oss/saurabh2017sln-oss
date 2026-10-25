@@ -1,0 +1,350 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 450" width="100%" height="450">
+  <defs>
+    <!-- True Pitch Black Glow Filters -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur1" />
+      <feGaussianBlur stdDeviation="5" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="flameGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Clip Paths for Rolling Animated Numbers -->
+    <clipPath id="clipStatNum">
+      <rect x="0" y="-18" width="60" height="24" />
+    </clipPath>
+    <clipPath id="clipStreakBig">
+      <rect x="0" y="-36" width="90" height="46" />
+    </clipPath>
+
+    <!-- Background Pattern -->
+    <pattern id="cardPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.75" fill="#13192f" />
+    </pattern>
+
+    <style>
+      .card-bg {
+        fill: #0c1024;
+        stroke: #1e2640;
+        stroke-width: 1.2;
+        rx: 14;
+      }
+      .card-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        fill: #60a5fa;
+      }
+      .stat-label {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13.5px;
+        font-weight: 500;
+        fill: #00F0FF;
+      }
+      .stat-num-text {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 15px;
+        font-weight: 700;
+        fill: #00F0FF;
+        filter: url(#neonGlow);
+      }
+      .streak-num-big {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 38px;
+        font-weight: 900;
+        fill: #60a5fa;
+        text-anchor: middle;
+      }
+      .streak-sub-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        fill: #94a3b8;
+        text-anchor: middle;
+      }
+      .streak-date-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11px;
+        fill: #475569;
+        text-anchor: middle;
+      }
+
+      /* ================================================= */
+      /* 🚀 NUMBER ROLLING & PULSE ANIMATIONS               */
+      /* ================================================= */
+      @keyframes rollTo11 {
+        0% { transform: translateY(0px); }
+        70% { transform: translateY(-264px); }
+        85% { transform: translateY(-258px); }
+        100% { transform: translateY(-264px); }
+      }
+      @keyframes rollTo3 {
+        0% { transform: translateY(0px); }
+        70% { transform: translateY(-72px); }
+        85% { transform: translateY(-68px); }
+        100% { transform: translateY(-72px); }
+      }
+      @keyframes rollTo19 {
+        0% { transform: translateY(0px); }
+        75% { transform: translateY(-760px); }
+        88% { transform: translateY(-752px); }
+        100% { transform: translateY(-760px); }
+      }
+      @keyframes rollTo2 {
+        0% { transform: translateY(0px); }
+        70% { transform: translateY(-80px); }
+        85% { transform: translateY(-76px); }
+        100% { transform: translateY(-80px); }
+      }
+      @keyframes rollTo1 {
+        0% { transform: translateY(0px); }
+        70% { transform: translateY(-40px); }
+        85% { transform: translateY(-36px); }
+        100% { transform: translateY(-40px); }
+      }
+
+      .ticker-commits {
+        animation: rollTo11 2.2s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+      }
+      .ticker-prs {
+        animation: rollTo3 1.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+      }
+      .ticker-streak-19 {
+        animation: rollTo19 2.5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+      }
+      .ticker-streak-2 {
+        animation: rollTo2 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+      }
+      .ticker-streak-1 {
+        animation: rollTo1 1.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+      }
+
+      /* Number Glowing Pulse */
+      @keyframes neonPulse {
+        0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 2px #00F0FF); }
+        50% { opacity: 1; filter: drop-shadow(0 0 10px #00F0FF); }
+      }
+      .pulse-number {
+        animation: neonPulse 2.5s ease-in-out infinite;
+      }
+
+      /* Flame Breathing Animation */
+      @keyframes flameBreathe {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px #FF6B00); }
+        50% { transform: scale(1.18); filter: drop-shadow(0 0 18px #FF0055); }
+      }
+      .flame-icon {
+        transform-origin: 460px 308px;
+        animation: flameBreathe 2s ease-in-out infinite;
+      }
+
+      /* Rotating Streak Circle Laser */
+      @keyframes ringSpin {
+        0% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: -200; }
+      }
+      .spinning-ring {
+        stroke-dasharray: 45 15;
+        animation: ringSpin 3s linear infinite;
+      }
+
+      /* Progress Bar Laser Glow */
+      @keyframes barLaser {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 1; filter: drop-shadow(0 0 6px #7c3aed); }
+      }
+      .lang-bar {
+        animation: barLaser 2s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- PURE JET BLACK BACKGROUND -->
+  <rect width="100%" height="100%" fill="#050814" rx="14" />
+  <rect width="100%" height="100%" fill="url(#cardPattern)" rx="14" />
+
+  <!-- ======================================================== -->
+  <!-- CARD 1: SAURABH MISHRA'S GITHUB STATS                    -->
+  <!-- ======================================================== -->
+  <g transform="translate(20, 20)">
+    <rect width="470" height="200" class="card-bg" stroke="#3b82f6" />
+    <text x="30" y="38" class="card-title">Saurabh mishra's GitHub Stats</text>
+
+    <!-- Row 1: Stars -->
+    <text x="30" y="75" class="stat-label">⭐ Total Stars Earned:</text>
+    <text x="420" y="75" class="stat-num-text text-anchor-end" text-anchor="end">0</text>
+
+    <!-- Row 2: Commits (ANIMATED ROLLING NUMBER 0 -> 11) -->
+    <text x="30" y="105" class="stat-label">⏳ Total Commits (last year):</text>
+    <g transform="translate(420, 105)">
+      <g clip-path="url(#clipStatNum)">
+        <g class="ticker-commits pulse-number">
+          <text x="0" y="0" class="stat-num-text" text-anchor="end">0</text>
+          <text x="0" y="24" class="stat-num-text" text-anchor="end">1</text>
+          <text x="0" y="48" class="stat-num-text" text-anchor="end">2</text>
+          <text x="0" y="72" class="stat-num-text" text-anchor="end">3</text>
+          <text x="0" y="96" class="stat-num-text" text-anchor="end">4</text>
+          <text x="0" y="120" class="stat-num-text" text-anchor="end">5</text>
+          <text x="0" y="144" class="stat-num-text" text-anchor="end">6</text>
+          <text x="0" y="168" class="stat-num-text" text-anchor="end">7</text>
+          <text x="0" y="192" class="stat-num-text" text-anchor="end">8</text>
+          <text x="0" y="216" class="stat-num-text" text-anchor="end">9</text>
+          <text x="0" y="240" class="stat-num-text" text-anchor="end">10</text>
+          <text x="0" y="264" class="stat-num-text" text-anchor="end" fill="#00FF88">11</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Row 3: PRs (ANIMATED ROLLING NUMBER 0 -> 3) -->
+    <text x="30" y="135" class="stat-label">🔀 Total PRs:</text>
+    <g transform="translate(420, 135)">
+      <g clip-path="url(#clipStatNum)">
+        <g class="ticker-prs pulse-number">
+          <text x="0" y="0" class="stat-num-text" text-anchor="end">0</text>
+          <text x="0" y="24" class="stat-num-text" text-anchor="end">1</text>
+          <text x="0" y="48" class="stat-num-text" text-anchor="end">2</text>
+          <text x="0" y="72" class="stat-num-text" text-anchor="end" fill="#00FF88">3</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Row 4: Issues -->
+    <text x="30" y="165" class="stat-label">❗ Total Issues:</text>
+    <text x="420" y="165" class="stat-num-text" text-anchor="end">0</text>
+
+    <!-- Row 5: Contributed to -->
+    <text x="30" y="190" class="stat-label">💻 Contributed to (last year):</text>
+    <text x="420" y="190" class="stat-num-text" text-anchor="end">0</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- CARD 2: MOST USED LANGUAGES                              -->
+  <!-- ======================================================== -->
+  <g transform="translate(510, 20)">
+    <rect width="390" height="200" class="card-bg" stroke="#8b5cf6" />
+    <text x="30" y="38" class="card-title" fill="#a78bfa">Most Used Languages</text>
+
+    <!-- Animated Progress Bar -->
+    <g transform="translate(30, 70)">
+      <rect width="330" height="12" rx="6" fill="#1e1e38" />
+      <!-- HCL Bar (61.32%) -->
+      <rect width="202" height="12" rx="6" fill="#7c3aed" class="lang-bar" />
+      <!-- HTML Bar (38.68%) -->
+      <rect x="202" width="128" height="12" rx="6" fill="#f97316" />
+    </g>
+
+    <!-- Legend -->
+    <g transform="translate(30, 120)">
+      <!-- HCL -->
+      <circle cx="6" cy="6" r="6" fill="#7c3aed" />
+      <text x="20" y="10" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#c4b5fd">
+        HCL <tspan fill="#00F0FF" class="pulse-number">61.32%</tspan>
+      </text>
+
+      <!-- HTML -->
+      <circle cx="180" cy="6" r="6" fill="#f97316" />
+      <text x="194" y="10" font-family="-apple-system, sans-serif" font-size="13" font-weight="600" fill="#fdba74">
+        HTML <tspan fill="#00F0FF" class="pulse-number">38.68%</tspan>
+      </text>
+    </g>
+
+    <!-- Live Telemetry Badge -->
+    <g transform="translate(30, 155)">
+      <rect width="330" height="28" rx="6" fill="#080c1e" stroke="#2e3856" stroke-width="1" />
+      <text x="165" y="18" font-family="'SF Mono', Consolas, monospace" font-size="11" fill="#00FF88" text-anchor="middle">
+        ⚡ REAL-TIME LANGUAGE ANALYSIS ACTIVE
+      </text>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- CARD 3: GITHUB STREAK STATS WITH ANIMATED NUMBERS        -->
+  <!-- ======================================================== -->
+  <g transform="translate(160, 240)">
+    <rect width="600" height="190" class="card-bg" stroke="#38bdf8" />
+
+    <!-- Left Column: Total Contributions (ANIMATED ROLLING 0 -> 19) -->
+    <g transform="translate(100, 75)">
+      <g clip-path="url(#clipStreakBig)">
+        <g class="ticker-streak-19">
+          <text x="0" y="0" class="streak-num-big">0</text>
+          <text x="0" y="40" class="streak-num-big">1</text>
+          <text x="0" y="80" class="streak-num-big">2</text>
+          <text x="0" y="120" class="streak-num-big">3</text>
+          <text x="0" y="160" class="streak-num-big">5</text>
+          <text x="0" y="200" class="streak-num-big">7</text>
+          <text x="0" y="240" class="streak-num-big">9</text>
+          <text x="0" y="280" class="streak-num-big">11</text>
+          <text x="0" y="320" class="streak-num-big">12</text>
+          <text x="0" y="360" class="streak-num-big">13</text>
+          <text x="0" y="400" class="streak-num-big">14</text>
+          <text x="0" y="440" class="streak-num-big">15</text>
+          <text x="0" y="480" class="streak-num-big">16</text>
+          <text x="0" y="520" class="streak-num-big">17</text>
+          <text x="0" y="560" class="streak-num-big">18</text>
+          <text x="0" y="600" class="streak-num-big">18</text>
+          <text x="0" y="640" class="streak-num-big">18</text>
+          <text x="0" y="680" class="streak-num-big">18</text>
+          <text x="0" y="720" class="streak-num-big">19</text>
+          <text x="0" y="760" class="streak-num-big" fill="#00F0FF">19</text>
+        </g>
+      </g>
+      <text x="0" y="45" class="streak-sub-text">Total Contributions</text>
+      <text x="0" y="68" class="streak-date-text">Mar 6 - Present</text>
+    </g>
+
+    <!-- Divider 1 -->
+    <line x1="200" y1="35" x2="200" y2="155" stroke="#1e293b" stroke-width="1.5" />
+
+    <!-- Center Column: Flame & Current Streak (ANIMATED ROLLING 0 -> 1 + BREATHING FLAME) -->
+    <g transform="translate(300, 85)">
+      <!-- Spinning Neon Ring around Streak -->
+      <circle cx="0" cy="-10" r="38" fill="none" stroke="#00F0FF" stroke-width="2.5" class="spinning-ring" filter="url(#neonGlow)" />
+      
+      <!-- Breathing Animated Flame Icon -->
+      <g transform="translate(-10, -56)">
+        <path d="M 10 0 C 10 0 16 7 16 13 C 16 16.5 13.5 19 10 19 C 6.5 19 4 16.5 4 13 C 4 9 7 5 10 0 Z" fill="#FF5500" class="flame-icon" filter="url(#flameGlow)" />
+        <path d="M 10 7 C 10 7 13 11 13 14 C 13 16 11.5 17 10 17 C 8.5 17 7 16 7 14 C 7 12 9 9 10 7 Z" fill="#FFD700" />
+      </g>
+
+      <!-- Animated Streak Number (0 -> 1) -->
+      <g transform="translate(0, 0)">
+        <g clip-path="url(#clipStreakBig)">
+          <g class="ticker-streak-1">
+            <text x="0" y="0" class="streak-num-big" fill="#C084FC">0</text>
+            <text x="0" y="40" class="streak-num-big" fill="#C084FC">1</text>
+          </g>
+        </g>
+      </g>
+
+      <text x="0" y="42" class="streak-sub-text" fill="#C084FC" font-weight="700">Current Streak</text>
+      <text x="0" y="62" class="streak-date-text">Oct 25</text>
+    </g>
+
+    <!-- Divider 2 -->
+    <line x1="400" y1="35" x2="400" y2="155" stroke="#1e293b" stroke-width="1.5" />
+
+    <!-- Right Column: Longest Streak (ANIMATED ROLLING 0 -> 2) -->
+    <g transform="translate(500, 75)">
+      <g clip-path="url(#clipStreakBig)">
+        <g class="ticker-streak-2">
+          <text x="0" y="0" class="streak-num-big">0</text>
+          <text x="0" y="40" class="streak-num-big">1</text>
+          <text x="0" y="80" class="streak-num-big" fill="#38BDF8">2</text>
+        </g>
+      </g>
+      <text x="0" y="45" class="streak-sub-text">Longest Streak</text>
+      <text x="0" y="68" class="streak-date-text">Aug 5 - Aug 6</text>
+    </g>
+  </g>
+</svg>

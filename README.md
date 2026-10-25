@@ -554,14 +554,9 @@ flowchart LR
 
 Senior engineers and architects regularly evaluate, negotiate with, and govern external partners and vendors.
 
-```mermaid
-flowchart LR
-    A["📝 RFI<br/>Market Scan"] --> B["📋 RFP<br/>Formal Proposal"]
-    B --> C["⚖️ Evaluation Matrix<br/>Arch, Security & Cost"]
-    C --> D["🤝 SOW & Commercials<br/>Milestones & SLA"]
-    D --> E["🏃 Sprints & Delivery<br/>Governance & RACI"]
-    E --> F["✅ Sign-Off & Release<br/>Acceptance Criteria"]
-```
+<div align="center">
+  <img src="./assets/animated-vendor-governance.svg" width="100%" alt="Vendor Management & Delivery Governance with Animated Flowing Arrows" />
+</div>
 
 #### Critical Governance Concepts:
 - **SOW (Statement of Work):** Formal document detailing scope, deliverables, acceptance criteria, timeline, milestones, and liabilities.
@@ -606,16 +601,7 @@ flowchart LR
 
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/74038190/221352987-68da234d-4d62-4e9d-9d7f-098dc657c2dc.gif" width="100" alt="3D Analytics Animation" />
-
-<br/><br/>
-
-<img src="https://github-readme-stats.vercel.app/api?username=saurabh2017sln-oss&show_icons=true&theme=tokyonight&hide_border=true&hide_rank=true&count_private=true" alt="GitHub Stats" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=saurabh2017sln-oss&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" />
-
-<br/><br/>
-
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=saurabh2017sln-oss&theme=tokyonight&hide_border=true" alt="Streak Stats" />
+<img src="./assets/animated-telemetry-dashboard.svg" width="100%" alt="Animated GitHub Stats & Engineering Telemetry Dashboard with Rolling Numbers" />
 
 <br/><br/>
 
