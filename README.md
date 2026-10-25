@@ -14,7 +14,7 @@
 
 <!-- ANIMATED MULTILINE ROLE & SPECIALIZATION STREAM -->
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=20&duration=3000&pause=1200&color=A855F7&center=true&vCenter=true&multiline=true&width=820&height=95&lines=Lead+DevSecOps+%7C+Autonomous+Agentic+AI+Architect;100%2B+Enterprise+Cloud+Workload+Migrations+(Zero-Downtime);Terraform+Landing+Zones+(CAF)+%7C+Policy-as-Code;Self-Healing+Cloud+Systems+%7C+FinOps+Governance" alt="Typing SVG Animation" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=20&duration=3000&pause=1200&color=A855F7&center=true&vCenter=true&multiline=true&width=820&height=150&lines=Lead+DevSecOps+%7C+Autonomous+Agentic+AI+Architect;100%2B+Enterprise+Cloud+Workload+Migrations+(Zero-Downtime);Terraform+Landing+Zones+(CAF)+%7C+Policy-as-Code;Self-Healing+Cloud+Systems+%7C+FinOps+Governance" alt="Typing SVG Animation" />
 </a>
 
 <br/><br/>
