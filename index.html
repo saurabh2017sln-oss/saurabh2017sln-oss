@@ -14,7 +14,7 @@
       box-sizing: border-box;
     }
     body {
-      background-color: #060913;
+      background-color: #000000;
       color: #e2e8f0;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
@@ -555,6 +555,17 @@
 
       // Draw Connections to Mouse / Touch Position
       if (mouse.x !== null && mouse.y !== null) {
+        // Glowing Neon Flashlight Follower on Mouse Arrow
+        const mouseGlow = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 180);
+        mouseGlow.addColorStop(0, 'rgba(0, 240, 255, 0.45)');
+        mouseGlow.addColorStop(0.3, 'rgba(168, 85, 247, 0.25)');
+        mouseGlow.addColorStop(0.7, 'rgba(0, 240, 255, 0.08)');
+        mouseGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = mouseGlow;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 180, 0, Math.PI * 2);
+        ctx.fill();
+
         for (let i = 0; i < nodes.length; i++) {
           const dx = mouse.x - nodes[i].x;
           const dy = mouse.y - nodes[i].y;
@@ -564,11 +575,11 @@
             ctx.beginPath();
             ctx.moveTo(mouse.x, mouse.y);
             ctx.lineTo(nodes[i].x, nodes[i].y);
-            ctx.strokeStyle = '#a855f7';
-            ctx.globalAlpha = (1 - dist / mouse.radius) * 0.7;
-            ctx.lineWidth = 1.4;
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = '#a855f7';
+            ctx.strokeStyle = '#00f0ff';
+            ctx.globalAlpha = (1 - dist / mouse.radius) * 0.9;
+            ctx.lineWidth = 1.8;
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = '#00f0ff';
             ctx.stroke();
             ctx.shadowBlur = 0;
           }

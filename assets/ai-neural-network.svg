@@ -1,23 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" width="100%" height="280">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 240" width="100%" height="240">
   <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#050814" />
-      <stop offset="50%" stop-color="#0b112c" />
-      <stop offset="100%" stop-color="#070a18" />
-    </linearGradient>
-
-    <!-- Scanning Laser Gradient -->
-    <linearGradient id="scanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00F0FF" stop-opacity="0" />
-      <stop offset="50%" stop-color="#00F0FF" stop-opacity="0.4" />
-      <stop offset="100%" stop-color="#A855F7" stop-opacity="0" />
-    </linearGradient>
-
-    <!-- Neon Glow Filter -->
-    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="blur1" />
-      <feGaussianBlur stdDeviation="10" result="blur2" />
+    <!-- True Pitch Black Background -->
+    <filter id="laserGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur1" />
+      <feGaussianBlur stdDeviation="8" result="blur2" />
       <feMerge>
         <feMergeNode in="blur2" />
         <feMergeNode in="blur1" />
@@ -25,295 +11,367 @@
       </feMerge>
     </filter>
 
-    <filter id="intenseGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="blur" />
+    <filter id="electricGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
       <feMerge>
         <feMergeNode in="blur" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
 
-    <!-- Grid Pattern -->
-    <pattern id="cyberGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 240, 255, 0.05)" stroke-width="1" />
-      <circle cx="0" cy="0" r="1" fill="rgba(0, 240, 255, 0.2)" />
+    <!-- Moving Laser Light Gradient -->
+    <linearGradient id="beamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF" stop-opacity="0" />
+      <stop offset="50%" stop-color="#00F0FF" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#A855F7" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Cyber Grid Pattern -->
+    <pattern id="dotMatrix" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#112233" />
     </pattern>
 
     <style>
-      .synapse-line {
-        stroke: rgba(0, 240, 255, 0.25);
+      .synapse-bg {
+        stroke: #0a1f33;
         stroke-width: 1.2;
-        stroke-dasharray: 4, 4;
-        animation: dashMove 20s linear infinite;
       }
       .synapse-active {
-        stroke: #A855F7;
-        stroke-width: 1.8;
-        filter: url(#neonGlow);
+        stroke: #00F0FF;
+        stroke-width: 2;
+        filter: url(#laserGlow);
+        stroke-dasharray: 80, 200;
+        animation: pulseElectricity 4s linear infinite;
       }
-      @keyframes dashMove {
-        to { stroke-dashoffset: -100; }
+      @keyframes pulseElectricity {
+        0% { stroke-dashoffset: 280; }
+        100% { stroke-dashoffset: -280; }
       }
-      @keyframes radarSweep {
+      @keyframes sweepRay {
         0% { transform: translateX(-200px); }
-        100% { transform: translateX(1400px); }
+        100% { transform: translateX(1200px); }
       }
-      .scan-beam {
-        animation: radarSweep 6s ease-in-out infinite;
+      .laser-ray {
+        animation: sweepRay 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       }
-      .node-text {
+      .hud-text {
         font-family: 'Courier New', monospace;
         font-size: 11px;
         fill: #00F0FF;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
       }
     </style>
   </defs>
 
-  <!-- Background Canvas -->
-  <rect width="100%" height="100%" fill="url(#bgGrad)" rx="12" />
-  <rect width="100%" height="100%" fill="url(#cyberGrid)" rx="12" />
+  <!-- PURE JET BLACK BACKGROUND -->
+  <rect width="100%" height="100%" fill="#000000" rx="12" />
+  <rect width="100%" height="100%" fill="url(#dotMatrix)" rx="12" />
 
-  <!-- Scanning Laser Beam -->
-  <rect class="scan-beam" y="0" width="160" height="280" fill="url(#scanGrad)" opacity="0.3" />
+  <!-- MOVING LASER LIGHT SWEEPER -->
+  <rect class="laser-ray" y="0" width="180" height="240" fill="url(#beamGrad)" opacity="0.25" />
 
-  <!-- ========================================== -->
-  <!-- NEURAL CONSTELLATION CONNECTIONS (SYNAPSES) -->
-  <!-- ========================================== -->
-  <g id="synapses">
-    <!-- Row 1 Connections -->
-    <line x1="80" y1="60" x2="220" y2="40" class="synapse-line" />
-    <line x1="220" y1="40" x2="380" y2="80" class="synapse-line" />
-    <line x1="380" y1="80" x2="520" y2="45" class="synapse-line" />
-    <line x1="520" y1="45" x2="680" y2="70" class="synapse-line" />
-    <line x1="680" y1="70" x2="840" y2="40" class="synapse-line" />
-    <line x1="840" y1="40" x2="980" y2="85" class="synapse-line" />
-    <line x1="980" y1="85" x2="1120" y2="50" class="synapse-line" />
+  <!-- BASE SYNAPSE CONNECTIONS -->
+  <g>
 
-    <!-- Cross & Vertical Synapses -->
-    <line x1="80" y1="60" x2="140" y2="160" class="synapse-line" />
-    <line x1="220" y1="40" x2="300" y2="140" class="synapse-line" />
-    <line x1="380" y1="80" x2="450" y2="180" class="synapse-line" />
-    <line x1="520" y1="45" x2="600" y2="150" class="synapse-line" />
-    <line x1="680" y1="70" x2="760" y2="170" class="synapse-line" />
-    <line x1="840" y1="40" x2="900" y2="150" class="synapse-line" />
-    <line x1="980" y1="85" x2="1050" y2="175" class="synapse-line" />
-
-    <!-- Row 2 Connections -->
-    <line x1="140" y1="160" x2="300" y2="140" class="synapse-line" />
-    <line x1="300" y1="140" x2="450" y2="180" class="synapse-line" />
-    <line x1="450" y1="180" x2="600" y2="150" class="synapse-line" />
-    <line x1="600" y1="150" x2="760" y2="170" class="synapse-line" />
-    <line x1="760" y1="170" x2="900" y2="150" class="synapse-line" />
-    <line x1="900" y1="150" x2="1050" y2="175" class="synapse-line" />
-
-    <!-- Row 3 Connections to Bottom -->
-    <line x1="140" y1="160" x2="200" y2="240" class="synapse-line" />
-    <line x1="300" y1="140" x2="360" y2="230" class="synapse-line" />
-    <line x1="450" y1="180" x2="520" y2="245" class="synapse-line" />
-    <line x1="600" y1="150" x2="680" y2="235" class="synapse-line" />
-    <line x1="760" y1="170" x2="820" y2="240" class="synapse-line" />
-    <line x1="900" y1="150" x2="960" y2="230" class="synapse-line" />
-    <line x1="1050" y1="175" x2="1110" y2="235" class="synapse-line" />
-
-    <!-- Horizontal Bottom Line -->
-    <line x1="200" y1="240" x2="360" y2="230" class="synapse-line" />
-    <line x1="360" y1="230" x2="520" y2="245" class="synapse-line" />
-    <line x1="520" y1="245" x2="680" y2="235" class="synapse-line" />
-    <line x1="680" y1="235" x2="820" y2="240" class="synapse-line" />
-    <line x1="820" y1="240" x2="960" y2="230" class="synapse-line" />
-    <line x1="960" y1="230" x2="1110" y2="235" class="synapse-line" />
+    <line x1="60" y1="60" x2="140" y2="110" class="synapse-bg" />
+    <line x1="140" y1="110" x2="90" y2="180" class="synapse-bg" />
+    <line x1="90" y1="180" x2="180" y2="200" class="synapse-bg" />
+    <line x1="140" y1="110" x2="240" y2="50" class="synapse-bg" />
+    <line x1="240" y1="50" x2="340" y2="80" class="synapse-bg" />
+    <line x1="340" y1="80" x2="280" y2="130" class="synapse-bg" />
+    <line x1="280" y1="130" x2="320" y2="190" class="synapse-bg" />
+    <line x1="340" y1="80" x2="420" y2="120" class="synapse-bg" />
+    <line x1="420" y1="120" x2="460" y2="60" class="synapse-bg" />
+    <line x1="420" y1="120" x2="480" y2="200" class="synapse-bg" />
+    <line x1="420" y1="120" x2="520" y2="140" class="synapse-bg" />
+    <line x1="460" y1="60" x2="580" y2="70" class="synapse-bg" />
+    <line x1="520" y1="140" x2="580" y2="70" class="synapse-bg" />
+    <line x1="520" y1="140" x2="620" y2="180" class="synapse-bg" />
+    <line x1="520" y1="140" x2="660" y2="110" class="synapse-bg" />
+    <line x1="580" y1="70" x2="660" y2="110" class="synapse-bg" />
+    <line x1="580" y1="70" x2="700" y2="50" class="synapse-bg" />
+    <line x1="660" y1="110" x2="740" y2="190" class="synapse-bg" />
+    <line x1="660" y1="110" x2="780" y2="120" class="synapse-bg" />
+    <line x1="700" y1="50" x2="780" y2="120" class="synapse-bg" />
+    <line x1="780" y1="120" x2="840" y2="70" class="synapse-bg" />
+    <line x1="780" y1="120" x2="860" y2="170" class="synapse-bg" />
+    <line x1="840" y1="70" x2="920" y2="110" class="synapse-bg" />
+    <line x1="860" y1="170" x2="920" y2="110" class="synapse-bg" />
+    <line x1="860" y1="170" x2="940" y2="190" class="synapse-bg" />
+    <line x1="840" y1="70" x2="940" y2="60" class="synapse-bg" />
+    <line x1="920" y1="110" x2="940" y2="60" class="synapse-bg" />
   </g>
 
-  <!-- ========================================== -->
-  <!-- DYNAMIC PULSING / BLINKING NEURAL NODES    -->
-  <!-- ========================================== -->
-  <g id="blinking-nodes">
-    <!-- Node 1 (80, 60) Cyan fast blink -->
-    <circle cx="80" cy="60" r="4" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
-    </circle>
-    <circle cx="80" cy="60" r="12" fill="none" stroke="#00F0FF" stroke-width="1" opacity="0.4">
-      <animate attributeName="r" values="6;22;6" dur="2s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite" />
-    </circle>
+  <!-- ACTIVE ELECTRIC LIGHT PULSES -->
+  <g>
+    <line x1="60" y1="60" x2="140" y2="110" class="synapse-active" style="animation-duration: 2.5s;" />
+    <line x1="90" y1="180" x2="180" y2="200" class="synapse-active" style="animation-duration: 4.1s;" />
+    <line x1="240" y1="50" x2="340" y2="80" class="synapse-active" style="animation-duration: 3.3s;" />
+    <line x1="280" y1="130" x2="320" y2="190" class="synapse-active" style="animation-duration: 2.5s;" />
+    <line x1="420" y1="120" x2="460" y2="60" class="synapse-active" style="animation-duration: 4.1s;" />
+    <line x1="420" y1="120" x2="520" y2="140" class="synapse-active" style="animation-duration: 3.3s;" />
+    <line x1="520" y1="140" x2="580" y2="70" class="synapse-active" style="animation-duration: 2.5s;" />
+    <line x1="520" y1="140" x2="660" y2="110" class="synapse-active" style="animation-duration: 4.1s;" />
+    <line x1="580" y1="70" x2="700" y2="50" class="synapse-active" style="animation-duration: 3.3s;" />
+    <line x1="660" y1="110" x2="780" y2="120" class="synapse-active" style="animation-duration: 2.5s;" />
+    <line x1="780" y1="120" x2="840" y2="70" class="synapse-active" style="animation-duration: 4.1s;" />
+    <line x1="840" y1="70" x2="920" y2="110" class="synapse-active" style="animation-duration: 3.3s;" />
+    <line x1="860" y1="170" x2="940" y2="190" class="synapse-active" style="animation-duration: 2.5s;" />
+    <line x1="920" y1="110" x2="940" y2="60" class="synapse-active" style="animation-duration: 4.1s;" />
+  </g>
 
-    <!-- Node 2 (220, 40) Purple pulse -->
-    <circle cx="220" cy="40" r="5" fill="#A855F7" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="4;8;4" dur="2.7s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.4;1;0.4" dur="2.7s" repeatCount="indefinite" />
+  <!-- BLINKING NEURAL LIGHT NODES -->
+  <g>
+    <circle cx="60" cy="60" r="6" fill="none" stroke="#00F0FF" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00F0FF;#FFFFFF;#00F0FF" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 3 (380, 80) Cyan / Magenta flash -->
-    <circle cx="380" cy="80" r="6" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="fill" values="#00F0FF;#FF007A;#00F0FF" dur="3s" repeatCount="indefinite" />
-      <animate attributeName="r" values="4;9;4" dur="3s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" />
+    <circle cx="60" cy="60" r="4.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00F0FF;#FFFFFF;#00F0FF" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
     </circle>
-    <circle cx="380" cy="80" r="15" fill="none" stroke="#FF007A" stroke-width="1.2">
-      <animate attributeName="r" values="8;28;8" dur="3s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.9;0;0.9" dur="3s" repeatCount="indefinite" />
+    <circle cx="140" cy="110" r="6" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.7999999999999998s" begin="0.2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.7999999999999998s" begin="0.2s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#A855F7;#FFFFFF;#A855F7" dur="1.7999999999999998s" begin="0.2s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 4 (520, 45) High-frequency blink -->
-    <circle cx="520" cy="45" r="4.5" fill="#00FF88" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.2;1;0.2" dur="1.4s" repeatCount="indefinite" />
-      <animate attributeName="r" values="3;6;3" dur="1.4s" repeatCount="indefinite" />
+    <circle cx="140" cy="110" r="4.5" fill="#A855F7" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.7999999999999998s" begin="0.2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7999999999999998s" begin="0.2s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#A855F7;#FFFFFF;#A855F7" dur="1.7999999999999998s" begin="0.2s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 5 (680, 70) Neural Hub Center -->
-    <circle cx="680" cy="70" r="7" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="5;11;5" dur="2.2s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="2.2s" repeatCount="indefinite" />
+    <circle cx="90" cy="180" r="6" fill="none" stroke="#00FF88" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.2s" begin="0.4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.2s" begin="0.4s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00FF88;#FFFFFF;#00FF88" dur="2.2s" begin="0.4s" repeatCount="indefinite" />
     </circle>
-    <circle cx="680" cy="70" r="18" fill="none" stroke="#00F0FF" stroke-width="1.5">
-      <animate attributeName="r" values="10;32;10" dur="2.2s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="1;0;1" dur="2.2s" repeatCount="indefinite" />
+    <circle cx="90" cy="180" r="4.5" fill="#00FF88" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.2s" begin="0.4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="0.4s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00FF88;#FFFFFF;#00FF88" dur="2.2s" begin="0.4s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 6 (840, 40) Purple pulse -->
-    <circle cx="840" cy="40" r="4" fill="#A855F7" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="3;6.5;3" dur="2.5s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" />
+    <circle cx="180" cy="200" r="6" fill="none" stroke="#FF007A" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#FF007A;#FFFFFF;#FF007A" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 7 (980, 85) Fast cyan synaptic burst -->
-    <circle cx="980" cy="85" r="5" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="4;8.5;4" dur="1.8s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite" />
+    <circle cx="180" cy="200" r="4.5" fill="#FF007A" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#FF007A;#FFFFFF;#FF007A" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
     </circle>
-    <circle cx="980" cy="85" r="14" fill="none" stroke="#A855F7" stroke-width="1">
-      <animate attributeName="r" values="7;24;7" dur="1.8s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.8;0;0.8" dur="1.8s" repeatCount="indefinite" />
+    <circle cx="240" cy="50" r="6" fill="none" stroke="#00F0FF" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="3.0s" begin="0.8s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="3.0s" begin="0.8s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00F0FF;#FFFFFF;#00F0FF" dur="3.0s" begin="0.8s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 8 (1120, 50) Green energy node -->
-    <circle cx="1120" cy="50" r="4" fill="#00FF88" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.1s" repeatCount="indefinite" />
+    <circle cx="240" cy="50" r="4.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="3.0s" begin="0.8s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3.0s" begin="0.8s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00F0FF;#FFFFFF;#00F0FF" dur="3.0s" begin="0.8s" repeatCount="indefinite" />
     </circle>
-
-    <!-- MIDDLE LAYER NODES -->
-    <!-- Node 9 (140, 160) -->
-    <circle cx="140" cy="160" r="4.5" fill="#A855F7" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.8s" repeatCount="indefinite" />
-      <animate attributeName="r" values="3.5;7;3.5" dur="2.8s" repeatCount="indefinite" />
+    <circle cx="280" cy="130" r="6" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#A855F7;#FFFFFF;#A855F7" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 10 (300, 140) Synaptic Spark Node -->
-    <circle cx="300" cy="140" r="6" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="4;9;4" dur="1.9s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite" />
+    <circle cx="280" cy="130" r="4.5" fill="#A855F7" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#A855F7;#FFFFFF;#A855F7" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
     </circle>
-    <circle cx="300" cy="140" r="16" fill="none" stroke="#00F0FF" stroke-width="1.2">
-      <animate attributeName="r" values="8;26;8" dur="1.9s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.9s" repeatCount="indefinite" />
+    <circle cx="340" cy="80" r="6" fill="none" stroke="#00FF88" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00FF88;#FFFFFF;#00FF88" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 11 (450, 180) Core Agent Brain Node -->
-    <circle cx="450" cy="180" r="7" fill="#FF007A" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="5;11;5" dur="2.4s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="2.4s" repeatCount="indefinite" />
+    <circle cx="340" cy="80" r="4.5" fill="#00FF88" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00FF88;#FFFFFF;#00FF88" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
     </circle>
-    <circle cx="450" cy="180" r="20" fill="none" stroke="#FF007A" stroke-width="1.5">
-      <animate attributeName="r" values="10;34;10" dur="2.4s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="1;0;1" dur="2.4s" repeatCount="indefinite" />
+    <circle cx="320" cy="190" r="6" fill="none" stroke="#FF007A" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.2s" begin="1.4000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.2s" begin="1.4000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#FF007A;#FFFFFF;#FF007A" dur="2.2s" begin="1.4000000000000001s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 12 (600, 150) Super-Hub Central -->
-    <circle cx="600" cy="150" r="8" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="6;13;6" dur="2.6s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2.6s" repeatCount="indefinite" />
+    <circle cx="320" cy="190" r="4.5" fill="#FF007A" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.2s" begin="1.4000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="1.4000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#FF007A;#FFFFFF;#FF007A" dur="2.2s" begin="1.4000000000000001s" repeatCount="indefinite" />
     </circle>
-    <circle cx="600" cy="150" r="24" fill="none" stroke="#00F0FF" stroke-width="1.5">
-      <animate attributeName="r" values="12;40;12" dur="2.6s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.6s" repeatCount="indefinite" />
+    <circle cx="420" cy="120" r="6" fill="none" stroke="#00F0FF" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00F0FF;#FFFFFF;#00F0FF" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 13 (760, 170) -->
-    <circle cx="760" cy="170" r="5" fill="#A855F7" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.3s" repeatCount="indefinite" />
-      <animate attributeName="r" values="4;8;4" dur="2.3s" repeatCount="indefinite" />
+    <circle cx="420" cy="120" r="4.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00F0FF;#FFFFFF;#00F0FF" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 14 (900, 150) Synapse Burst -->
-    <circle cx="900" cy="150" r="6" fill="#00FF88" filter="url(#intenseGlow)">
-      <animate attributeName="r" values="4;9;4" dur="1.7s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.7s" repeatCount="indefinite" />
+    <circle cx="460" cy="60" r="6" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="3.0s" begin="1.8s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="3.0s" begin="1.8s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#A855F7;#FFFFFF;#A855F7" dur="3.0s" begin="1.8s" repeatCount="indefinite" />
     </circle>
-    <circle cx="900" cy="150" r="16" fill="none" stroke="#00FF88" stroke-width="1.2">
-      <animate attributeName="r" values="8;28;8" dur="1.7s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.7s" repeatCount="indefinite" />
+    <circle cx="460" cy="60" r="4.5" fill="#A855F7" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="3.0s" begin="1.8s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3.0s" begin="1.8s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#A855F7;#FFFFFF;#A855F7" dur="3.0s" begin="1.8s" repeatCount="indefinite" />
     </circle>
-
-    <!-- Node 15 (1050, 175) -->
-    <circle cx="1050" cy="175" r="4.5" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" />
+    <circle cx="480" cy="200" r="6" fill="none" stroke="#00FF88" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00FF88;#FFFFFF;#00FF88" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
     </circle>
-
-    <!-- BOTTOM LAYER NODES -->
-    <!-- Node 16 (200, 240) -->
-    <circle cx="200" cy="240" r="4" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite" />
+    <circle cx="480" cy="200" r="4.5" fill="#00FF88" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00FF88;#FFFFFF;#00FF88" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
     </circle>
-    <!-- Node 17 (360, 230) -->
-    <circle cx="360" cy="230" r="5" fill="#A855F7" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+    <circle cx="520" cy="140" r="6" fill="none" stroke="#FF007A" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#FF007A;#FFFFFF;#FF007A" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
     </circle>
-    <!-- Node 18 (520, 245) -->
-    <circle cx="520" cy="245" r="4.5" fill="#00FF88" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.4s" repeatCount="indefinite" />
+    <circle cx="520" cy="140" r="4.5" fill="#FF007A" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#FF007A;#FFFFFF;#FF007A" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
     </circle>
-    <!-- Node 19 (680, 235) -->
-    <circle cx="680" cy="235" r="5" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite" />
+    <circle cx="580" cy="70" r="6" fill="none" stroke="#00F0FF" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00F0FF;#FFFFFF;#00F0FF" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
     </circle>
-    <!-- Node 20 (820, 240) -->
-    <circle cx="820" cy="240" r="4" fill="#FF007A" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.7s" repeatCount="indefinite" />
+    <circle cx="580" cy="70" r="4.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00F0FF;#FFFFFF;#00F0FF" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
     </circle>
-    <!-- Node 21 (960, 230) -->
-    <circle cx="960" cy="230" r="5" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.1s" repeatCount="indefinite" />
+    <circle cx="620" cy="180" r="6" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#A855F7;#FFFFFF;#A855F7" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
     </circle>
-    <!-- Node 22 (1110, 235) -->
-    <circle cx="1110" cy="235" r="4" fill="#A855F7" filter="url(#intenseGlow)">
-      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="2.9s" repeatCount="indefinite" />
+    <circle cx="620" cy="180" r="4.5" fill="#A855F7" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#A855F7;#FFFFFF;#A855F7" dur="2.6s" begin="0.6000000000000001s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="660" cy="110" r="6" fill="none" stroke="#00FF88" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="3.0s" begin="0.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="3.0s" begin="0.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00FF88;#FFFFFF;#00FF88" dur="3.0s" begin="0.8000000000000003s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="660" cy="110" r="4.5" fill="#00FF88" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="3.0s" begin="0.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3.0s" begin="0.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00FF88;#FFFFFF;#00FF88" dur="3.0s" begin="0.8000000000000003s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="700" cy="50" r="6" fill="none" stroke="#FF007A" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#FF007A;#FFFFFF;#FF007A" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="700" cy="50" r="4.5" fill="#FF007A" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#FF007A;#FFFFFF;#FF007A" dur="1.4s" begin="1.0s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="740" cy="190" r="6" fill="none" stroke="#00F0FF" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00F0FF;#FFFFFF;#00F0FF" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="740" cy="190" r="4.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00F0FF;#FFFFFF;#00F0FF" dur="1.7999999999999998s" begin="1.2000000000000002s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="780" cy="120" r="6" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.2s" begin="1.4000000000000004s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.2s" begin="1.4000000000000004s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#A855F7;#FFFFFF;#A855F7" dur="2.2s" begin="1.4000000000000004s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="780" cy="120" r="4.5" fill="#A855F7" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.2s" begin="1.4000000000000004s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="1.4000000000000004s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#A855F7;#FFFFFF;#A855F7" dur="2.2s" begin="1.4000000000000004s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="840" cy="70" r="6" fill="none" stroke="#00FF88" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00FF88;#FFFFFF;#00FF88" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="840" cy="70" r="4.5" fill="#00FF88" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00FF88;#FFFFFF;#00FF88" dur="2.6s" begin="1.6s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="860" cy="170" r="6" fill="none" stroke="#FF007A" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="3.0s" begin="1.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="3.0s" begin="1.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#FF007A;#FFFFFF;#FF007A" dur="3.0s" begin="1.8000000000000003s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="860" cy="170" r="4.5" fill="#FF007A" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="3.0s" begin="1.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3.0s" begin="1.8000000000000003s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#FF007A;#FFFFFF;#FF007A" dur="3.0s" begin="1.8000000000000003s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="920" cy="110" r="6" fill="none" stroke="#00F0FF" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00F0FF;#FFFFFF;#00F0FF" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="920" cy="110" r="4.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00F0FF;#FFFFFF;#00F0FF" dur="1.4s" begin="0.0s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="940" cy="190" r="6" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#A855F7;#FFFFFF;#A855F7" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="940" cy="190" r="4.5" fill="#A855F7" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#A855F7;#FFFFFF;#A855F7" dur="1.7999999999999998s" begin="0.20000000000000018s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="940" cy="60" r="6" fill="none" stroke="#00FF88" stroke-width="1.5" opacity="0">
+      <animate attributeName="r" values="4;24;4" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="stroke" values="#00FF88;#FFFFFF;#00FF88" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="940" cy="60" r="4.5" fill="#00FF88" filter="url(#laserGlow)">
+      <animate attributeName="r" values="3.5;7.5;3.5" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
+      <animate attributeName="fill" values="#00FF88;#FFFFFF;#00FF88" dur="2.2s" begin="0.40000000000000036s" repeatCount="indefinite" />
     </circle>
   </g>
 
-  <!-- ========================================== -->
-  <!-- FLOATING DATA PARTICLES (SYNAPTIC STREAM)  -->
-  <!-- ========================================== -->
-  <g id="data-particles">
-    <!-- Particle moving along line 1 -->
-    <circle r="2.5" fill="#FFFFFF" filter="url(#intenseGlow)">
-      <animateMotion path="M 80,60 L 220,40 L 380,80 L 520,45 L 680,70 L 840,40 L 980,85 L 1120,50" dur="7s" repeatCount="indefinite" />
+  <!-- FLYING LIGHT PACKETS (DATA BURSTS) -->
+  <g>
+    <circle r="3.5" fill="#FFFFFF" filter="url(#laserGlow)">
+      <animateMotion path="M 60,60 L 140,110 L 240,50 L 340,80 L 460,60 L 580,70 L 700,50 L 840,70 L 920,110" dur="4.5s" repeatCount="indefinite" />
     </circle>
-    <!-- Particle moving along line 2 (opposite) -->
-    <circle r="3" fill="#00F0FF" filter="url(#intenseGlow)">
-      <animateMotion path="M 1050,175 L 900,150 L 760,170 L 600,150 L 450,180 L 300,140 L 140,160" dur="8s" repeatCount="indefinite" />
+    <circle r="3.5" fill="#00F0FF" filter="url(#laserGlow)">
+      <animateMotion path="M 940,190 L 860,170 L 740,190 L 620,180 L 480,200 L 320,190 L 180,200 L 90,180" dur="5.5s" repeatCount="indefinite" />
     </circle>
-    <!-- Particle moving vertically down Hub -->
-    <circle r="3" fill="#FF007A" filter="url(#intenseGlow)">
-      <animateMotion path="M 680,70 L 600,150 L 680,235" dur="4s" repeatCount="indefinite" />
-    </circle>
-    <circle r="2.5" fill="#00FF88" filter="url(#intenseGlow)">
-      <animateMotion path="M 380,80 L 450,180 L 520,245" dur="5s" repeatCount="indefinite" />
+    <circle r="4" fill="#FF007A" filter="url(#laserGlow)">
+      <animateMotion path="M 420,120 L 520,140 L 660,110 L 780,120 L 920,110" dur="3s" repeatCount="indefinite" />
     </circle>
   </g>
 
-  <!-- ========================================== -->
-  <!-- HOLOGRAPHIC AI LABELS                      -->
-  <!-- ========================================== -->
-  <text x="30" y="30" class="node-text" opacity="0.6">SYS_STATUS // NEURAL_MESH_ONLINE</text>
-  <text x="1000" y="30" class="node-text" opacity="0.6" text-anchor="end">AGENTIC_SYNAPSE_RATE // 99.98%</text>
-  
-  <text x="600" y="195" text-anchor="middle" font-family="'Orbitron', 'Courier New', sans-serif" font-weight="800" font-size="14" fill="#00F0FF" letter-spacing="3" opacity="0.85">
-    AUTONOMOUS AI SYNAPSE ENGINE
-    <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" />
+  <!-- HUD LABELS -->
+  <text x="25" y="25" class="hud-text">AI_NEURAL_LIGHT_STREAM // ONLINE</text>
+  <text x="500.0" y="25" text-anchor="middle" font-family="'Orbitron', sans-serif" font-weight="900" font-size="12" fill="#00F0FF" letter-spacing="3">
+    ⚡ AUTONOMOUS AGENTIC AI SYNAPTIC GRID ⚡
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
   </text>
-  <text x="600" y="215" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#A855F7" letter-spacing="2" opacity="0.75">
-    INTERACTIVE MULTI-AGENT CLOUD ORCHESTRATION
-  </text>
+  <text x="975" y="25" text-anchor="end" class="hud-text">STATUS: ACTIVE</text>
 </svg>
